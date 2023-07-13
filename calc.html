@@ -44,6 +44,7 @@ li { display:inline }
 </style>
 <SCRIPT LANGUAGE="JavaScript">
 
+// alapműveletek
 function szamol1()
  {
 	var x = Number(document.szamolo.szam1.value);
@@ -77,6 +78,8 @@ function szamol1()
 	document.getElementById("eredmeny1").innerHTML = eredm;
  }
  
+
+ // négyzetgyök, logaritmus, szinusz, ...
  function szamol3()
  {
 	var x = Number(document.szamolo.szam3.value);
@@ -117,6 +120,9 @@ function szamol1()
 	
  }
  
+
+ // XL számítása
+ // vagy f  vagy L visszaszámítása  XL-ből
  function szamol4()
  {
 	var L4 = Number(document.szamolo.szl4.value);	// L  mH-ben !!
@@ -139,6 +145,9 @@ function szamol1()
 	
  }
  
+
+ // Xc számítása
+ // vagy f  vagy C visszaszámítása  Xc-ből
  function szamol5()
  {
 	var C5 = Number(document.szamolo.szc5.value);   // C  nF-ban !!
@@ -161,6 +170,8 @@ function szamol1()
 	
  } 
  
+ // rezonancia frekvencia számítása
+ // vagy L vagy C visszaszámítása rezonancia frekvenciából
 function szamol6()
  {
 	var C6 = Number(document.szamolo.szc6.value);	// C  nF-ban !!
@@ -183,13 +194,30 @@ function szamol6()
 	
  } 
  
- 
+
+ // vezeték ellenállás számítása
  function szamol7()
  {
+	var l7 = Number(document.szamolo.szl7.value);	//vezeték hossz méterben !!
+	var d7 = Number(document.szamolo.szd7.value);	// vezeék átmérő mm-ben !!
+	var rho;		// fajlagos ellenállás  -->  ohm * mm2 / m   !!
+	var Rvez;
+	switch (parseInt(document.szamolo.anyag7.value))
+	{
+		case 1: rho = 0.0175;	// réz
+				break;
+		case 2: rho = 0.028;	// alumínium
+				break;
+		case 3: rho = 0.023;	// arany
+				break;		
+		case 3: rho = 0.016;	// ezüst
+				break;		
 
+ 	}
 
+	 Rvez = rho*l7 / (d7*d7*Math.PI/4);
+	 document.szamolo.szr7.value = Rvez;
  }
-
  
 </SCRIPT>
 </head>
@@ -273,10 +301,11 @@ d (mm): <input type="text" name="szd7">
 R (&Omega;): <input type="text" name="szr7">
 .....	R = &rho;*l / (d<sup>2</sup> *&pi; /4)
 <br>
-Anyag: <select name="muvelet7">
+Anyag: <select name="anyag7" onclick="szamol7()">
 	<option value="1">réz</option>
 	<option value="2">alumínium</option>
 	<option value="3">arany</option> 
+	<option value="4">ezüst</option>
 	</select>
 <input type="button" value="Számol" onClick="szamol7()"><br>		
 <br>
