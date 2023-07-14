@@ -76,7 +76,7 @@
                 label1 = "DG tároló  (DG latch)";
 	        
             draw1.fillText(label1,x+30,y+50);   
-	        draw1.fill();
+	        // draw1.fill();
 	
 	        // tároló
 	        draw1.lineWidth=3;
@@ -102,13 +102,14 @@
                 draw1.moveTo(x+260,y+140);
 		        draw1.lineTo(x+310,y+140);   // kimenet  Q
                 draw1.closePath();		
-		        
+                draw1.stroke();
+                draw1.beginPath();
+                draw1.arc(x+267,y+220,7,0,2*Math.PI);
 		        draw1.moveTo(x+274,y+220);
 		        draw1.lineTo(x+310,y+220);   // negált kimenet    
-		        draw1.closePath();		
-                draw1.arc(x+267,y+220,7,0,2*Math.PI);
-		        draw1.stroke();
-
+		        draw1.closePath();	
+                draw1.stroke();
+                //draw1.fill();
 
 	        }
 	        
@@ -126,7 +127,7 @@
  	            draw1.fillText("G",x+170,y+230);
             }
 
-            draw1.fill();
+            // draw1.fill();
  	        // rajzbeki2(x+70,y+150,x+340,y+190);	
  	
         }
