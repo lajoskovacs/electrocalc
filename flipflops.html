@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip-flop</title>
+</head>
+<body>
+    <form name="valaszt" method="get" enctype="text/plain">
+        <h1>Tároló áramkörök (Flip-flop, Latch) működése</h1>
+    
+        <h3>Tároló típusa</h3> 
+        <select name="tarolo" size="1" onchange="flipflopType()">
+                <option value="sr" selected>SR Latch</option>
+                <option value="dg">DG Latch</option>
+                <option value="jk">JK flip-flop</option>
+                <option value="t">T flip-flop</option>
+                <option value="d">D flip-flop</option>		
+        </select>
+        <p> </p>
+        <br>		
+    </form>		
+    <canvas width="700" height="500" id="drawsheet" onclick="clickCanv(event)" style="border:2px solid#c3c3c3;background-color: #f1f1f1;">
+    A HTML5 canvas nem támogatott! </canvas>
+      
+    <script LANGUAGE="JavaScript">
+ 
+        var canv1;
+        var draw1;
+        
+        setupVaszon();
+        
+        //*********************************************************************************
+        
+        function setupVaszon()
+        {
+            canv1 = document.getElementById("drawsheet");
+            draw1 = canv1.getContext("2d");
+        
+            
+        }
+        
+        //*********************************************************************************
+        
+        function flipflopType()
+        {
+
+        }  
+        
+       //*********************************************************************************
+        
+       function clickCanv()
+        {
+
+        }     
+
+</script>
+
+</body>
+</html>
