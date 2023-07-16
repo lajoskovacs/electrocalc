@@ -124,11 +124,6 @@
  	            sheet.lineTo(160,220);  //  bemenet_B
  	            sheet.closePath();	
 	            sheet.stroke();
-
-            }
-
-
-	        {
                 
 		        sheet.beginPath();
                 sheet.moveTo(260,140);
@@ -145,20 +140,11 @@
 
 	        }
 	        
-	
 	        // bemenetek feliratok
 	        sheet.font="25px Arial";
 	        sheet.fillStyle = "#221999";
-            if(this.type=="SR")
-	        {
-			   sheet.fillText("S",170,y+150);
- 	            sheet.fillText("R",170,230);
-            }
-            else
-            {
-                sheet.fillText("D",x+170,150);
- 	            sheet.fillText("G",x+170,230);
-            }
+            sheet.fillText(this.type[0],170,150);
+ 	        sheet.fillText(this.type[1],170,230);
 
  	
           }
