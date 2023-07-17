@@ -84,6 +84,10 @@
 		    this.height = h;
 		    this.type = "SR";
             this.title = "SR tároló  (SR latch)";
+            this.S = 0;     // input-S
+            this.R = 0;     // input-R
+            this.Q = 0;     // output-Q, present state
+            this.nextQ = 0;     // next state, 
 	    
 	     }
 	     
@@ -92,6 +96,8 @@
 	     {
             var du=this.du;     // drawing unit
 	
+            // canvas  x,y coordinates translate
+            sheet.translate(this.x, this.y);
             // style
             sheet.clearRect(this.x,this.y,this.width,this.height);
             sheet.textBaseline = "bottom";
@@ -102,14 +108,13 @@
  	        sheet.font="25px Arial";
  	
             // flipflop name label
-            //this.setTitle();
             sheet.fillText(this.title,10*du,15*du);
 
             // drawing flipflop
             {
 	            sheet.strokeRect(40*du,30*du,30*du,50*du);      // flipflop rectangle
-                this.drawLine(sheet,25*du,40*du,40*du,40*du);   //  input_S
-                this.drawLine(sheet,25*du,70*du,40*du,70*du);   //  input_R
+                this.drawLine(sheet,25*du,40*du,40*du,40*du);   //  input_1  
+                this.drawLine(sheet,25*du,70*du,40*du,70*du);   //  input_2
                 
                 this.drawLine(sheet,70*du,40*du,85*du,40*du);   // output  Q
                 this.drawLine(sheet,76*du,70*du,85*du,70*du);   // output  not_Q
@@ -127,11 +132,11 @@
  	        sheet.fillText(this.type[1],42*du,74*du);
             sheet.fillText("Q",60*du,44*du);
 
-
+            sheet.translate(0,0);  // canvas  x,y coordinates reset
           }
 
 
-          drawLine(sheet,x1,y1,x2,y2)
+        drawLine(sheet,x1,y1,x2,y2)
 	      {
                 sheet.beginPath();
 		        sheet.moveTo(x1,y1);
@@ -139,6 +144,15 @@
 		        sheet.closePath();	
                 sheet.stroke();
            }
+
+        // calculation of next state of flipflop
+        calc() 
+          {
+
+
+
+
+          }
 
      /*
           setTitle()
