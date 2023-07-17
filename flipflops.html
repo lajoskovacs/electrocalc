@@ -91,60 +91,77 @@
 	    // SR vagy DG tároló rajzolása
 	    //  x,y  kezdő koordináták (bal-felső sarok)
 	    // w - szélesség,  h - magasság
-	    //  szükséges terület ->  420*300
+	    //  optimális terület ->  400*400
 	       
-			this.x=x;
-			this.y=y;
-			this.width=w;
-			this.height=h;
-			this.type=typ;
+         var xu; 
+         var yu;
+        
+        xu = w/100;
+        yu = h/100;
+        if(xu<yu) this.du=xu;       // du -->  drawn unit  !!
+        else this.du=yu;
+		this.x=x;
+		this.y=y;
+		this.width=w;
+		this.height=h;
+		this.type=typ;
 	    
 	     }
 	     
 	     draw(sheet)
 	     {
             var label1;
+            var du=this.du;     // drawing unit
 	
-            // sheet.clearRect(x,y,420,300);
+            // style
+            sheet.clearRect(this.x,this.y,this.width,this.height);
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
-	        
-	
-	        // tároló
 	        sheet.lineWidth=3;
 	        sheet.strokeStyle="#FF0000";	
 	        sheet.fillStyle = "#C3C3C3";
 	        
+
+            // drawing flipflop
             {
+                // 
+	            sheet.strokeRect(40*du,40*du,25*du,50*du);  // flipflop rectangle
+                sheet.stroke();
                 sheet.beginPath();
-	            sheet.strokeRect(160,100,100,160);
-	            sheet.moveTo(115,140);
- 	            sheet.lineTo(160,140);  //  bemenet_A
- 	            sheet.moveTo(115,220);
- 	            sheet.lineTo(160,220);  //  bemenet_B
+	            sheet.moveTo(25*du,50*du);
+ 	            sheet.lineTo(40*du,50*du);  //  input_S
+                sheet.closePath();
+                sheet.stroke();
+
+                sheet.beginPath(); 
+ 	            sheet.moveTo(25*du,80*du);
+ 	            sheet.lineTo(40*du,80*du);  //  input_R
  	            sheet.closePath();	
 	            sheet.stroke();
                 
 		        sheet.beginPath();
-                sheet.moveTo(260,140);
-		        sheet.lineTo(310,140);   // kimenet  Q
+                sheet.moveTo(65*du,50*du);
+		        sheet.lineTo(80*du,50*du);   // output  Q
                 sheet.closePath();		
                 sheet.stroke();
                 sheet.beginPath();
-                sheet.arc(267,220,7,0,2*Math.PI);
-		        sheet.moveTo(274,220);
-		        sheet.lineTo(310,220);   // negált kimenet    
+                sheet.arc(68*du,80*du,3*du,0,2*Math.PI);
+                sheet.closePath();
+                sheet.stroke();
+                sheet.beginPath();
+		        sheet.moveTo(71*du,80*du);
+		        sheet.lineTo(80*du,80*du);   // negált kimenet    
 		        sheet.closePath();	
                 sheet.stroke();
                 //sheet.fill();
 
 	        }
 	        
-	        // bemenetek feliratok
+	        // input label
 	        sheet.font="25px Arial";
 	        sheet.fillStyle = "#221999";
-            sheet.fillText(this.type[0],170,150);
- 	        sheet.fillText(this.type[1],170,230);
+            sheet.fillText(this.type[0],42*du,53*du);
+ 	        sheet.fillText(this.type[1],42*du,83*du);
 
  	
           }
