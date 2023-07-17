@@ -40,7 +40,7 @@
             draw1 = canv1.getContext("2d");
         
            
-            myFlipflop= new FlipflopSR(0,0,300,300);		// tároló létrehozása
+            myFlipflop = new FlipflopSR(0,0,300,300);		// tároló létrehozása
             myFlipflop.draw(draw1);
             
     }
@@ -50,8 +50,13 @@
     function flipflopType()
      {
         fftype=document.valaszt.tarolo.value;	// kiválasztott tároló típus
-       // myFlipflop.type=fftype;
-       // myFlipflop.draw(draw1);
+
+        if(fftype == "SR")
+            myFlipflop = new FlipflopSR(0,0,300,300);
+	    else if(fftype == "DG")
+            myFlipflop = new FlipflopDG(0,0,300,300);
+      
+        myFlipflop.draw(draw1);
     }  
         
     //*********************************************************************************
@@ -66,7 +71,7 @@
 
 	class FlipflopSR{
          constructor(x,y,w,h){    
-	    // SR  tároló rajzolása
+	    // SR  tároló rajzolása, számolása
 	    //  x,y  kezdő koordináták (bal-felső sarok)
 	    // w - szélesség,  h - magasság
 	    //  optimális terület ->  300*300
@@ -153,6 +158,37 @@
 
 
           }
+
+
+       
+    }
+
+
+  class FlipflopDG extends FlipflopSR {
+        // DG  tároló rajzolása, számolása
+	    //  x,y  kezdő koordináták (bal-felső sarok)
+	    // w - szélesség,  h - magasság
+
+        constructor(x,y,w,h) {
+            super(x,y,w,h);
+            this.type = "DG";
+            this.title = "DG tároló  (D latch)";
+            this.D = 0;     // input-D
+            this.G = 0;     // input-G
+
+        }
+
+
+         // calculation of next state of flipflop
+        calc() 
+          {
+                //  DG latch, dominantly Reset
+            this.nextQ = this.D && this.G || this.D && this.Q || !this.G && this.Q;
+
+
+          }
+
+
 
      /*
           setTitle()
