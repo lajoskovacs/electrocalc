@@ -125,35 +125,17 @@
             // drawing flipflop
             {
                 // 
-	            sheet.strokeRect(40*du,40*du,25*du,50*du);  // flipflop rectangle
-                sheet.stroke();
-                sheet.beginPath();
-	            sheet.moveTo(25*du,50*du);
- 	            sheet.lineTo(40*du,50*du);  //  input_S
-                sheet.closePath();
-                sheet.stroke();
-
-                sheet.beginPath(); 
- 	            sheet.moveTo(25*du,80*du);
- 	            sheet.lineTo(40*du,80*du);  //  input_R
- 	            sheet.closePath();	
-	            sheet.stroke();
+	            sheet.strokeRect(40*du,40*du,25*du,50*du);      // flipflop rectangle
+                this.drawLine(sheet,25*du,50*du,40*du,50*du);   //  input_S
+                this.drawLine(sheet,25*du,80*du,40*du,80*du);   //  input_R
                 
-		        sheet.beginPath();
-                sheet.moveTo(65*du,50*du);
-		        sheet.lineTo(80*du,50*du);   // output  Q
-                sheet.closePath();		
-                sheet.stroke();
+                this.drawLine(sheet,65*du,50*du,80*du,50*du);   // output  Q
+                this.drawLine(sheet,71*du,80*du,80*du,80*du);   // output  not_Q
+
                 sheet.beginPath();
-                sheet.arc(68*du,80*du,3*du,0,2*Math.PI);
+                sheet.arc(68*du,80*du,3*du,0,2*Math.PI);        // negation circle
                 sheet.closePath();
                 sheet.stroke();
-                sheet.beginPath();
-		        sheet.moveTo(71*du,80*du);
-		        sheet.lineTo(80*du,80*du);   // negált kimenet    
-		        sheet.closePath();	
-                sheet.stroke();
-                //sheet.fill();
 
 	        }
 	        
@@ -165,6 +147,19 @@
 
  	
           }
+
+          drawLine(sheet,x1,y1,x2,y2)
+	      {
+                sheet.beginPath();
+		        sheet.moveTo(x1,y1);
+		        sheet.lineTo(x2,y2);      
+		        sheet.closePath();	
+                sheet.stroke();
+
+          }
+
+
+
 
 	}
 
