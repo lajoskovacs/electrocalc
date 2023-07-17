@@ -40,7 +40,7 @@
             draw1 = canv1.getContext("2d");
         
            
-            myFlipflop= new Flipflop(0,0,300,300,"SR");		// tároló létrehozása
+            myFlipflop= new FlipflopSR(0,0,300,300);		// tároló létrehozása
             myFlipflop.draw(draw1);
             
     }
@@ -50,8 +50,8 @@
     function flipflopType()
      {
         fftype=document.valaszt.tarolo.value;	// kiválasztott tároló típus
-        myFlipflop.type=fftype;
-        myFlipflop.draw(draw1);
+       // myFlipflop.type=fftype;
+       // myFlipflop.draw(draw1);
     }  
         
     //*********************************************************************************
@@ -64,9 +64,9 @@
  
     //*********************************************************************************
 
-	class Flipflop{
-         constructor(x,y,w,h,typ){    
-	    // SR vagy DG tároló rajzolása
+	class FlipflopSR{
+         constructor(x,y,w,h){    
+	    // SR  tároló rajzolása
 	    //  x,y  kezdő koordináták (bal-felső sarok)
 	    // w - szélesség,  h - magasság
 	    //  optimális terület ->  300*300
@@ -82,8 +82,8 @@
 		    this.y = y;
 		    this.width = w;
 		    this.height = h;
-		    this.type = typ;
-            this.setTitle();
+		    this.type = "SR";
+            this.title = "SR tároló  (SR latch)";
 	    
 	     }
 	     
@@ -102,7 +102,7 @@
  	        sheet.font="25px Arial";
  	
             // flipflop name label
-            this.setTitle();
+            //this.setTitle();
             sheet.fillText(this.title,10*du,15*du);
 
             // drawing flipflop
@@ -140,7 +140,7 @@
                 sheet.stroke();
            }
 
-
+     /*
           setTitle()
           {
             var label;
@@ -158,7 +158,7 @@
 
           } 
 
-
+*/
 
 
 	}
