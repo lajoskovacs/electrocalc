@@ -148,8 +148,8 @@
         // calculation of next state of flipflop
         calc() 
           {
-
-
+                //  SR latch, dominantly Reset
+            this.nextQ = this.S && !this.R || !this.R && this.Q;
 
 
           }
