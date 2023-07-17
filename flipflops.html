@@ -55,6 +55,8 @@
             myFlipflop = new FlipflopSR(0,0,300,300);
 	    else if(fftype == "DG")
             myFlipflop = new FlipflopDG(0,0,300,300);
+        else if(fftype == "DC")
+            myFlipflop = new FlipflopDC(0,0,300,300);   
       
         myFlipflop.draw(draw1);
     }  
@@ -164,7 +166,7 @@
     }
 
 
-  class FlipflopDG extends FlipflopSR {
+    class FlipflopDG extends FlipflopSR {
         // DG  tároló rajzolása, számolása
 	    //  x,y  kezdő koordináták (bal-felső sarok)
 	    // w - szélesség,  h - magasság
@@ -182,13 +184,44 @@
          // calculation of next state of flipflop
         calc() 
           {
-                //  DG latch, dominantly Reset
+                //  DG latch
             this.nextQ = this.D && this.G || this.D && this.Q || !this.G && this.Q;
 
 
           }
 
+    }
 
+
+    class FlipflopDC extends FlipflopSR {
+        // D tároló rajzolása, számolása
+	    //  x,y  kezdő koordináták (bal-felső sarok)
+	    // w - szélesség,  h - magasság
+
+        constructor(x,y,w,h) {
+            super(x,y,w,h);
+            this.type = "DC";
+            this.title = "D tároló  (D flipflop)";
+            this.D = 0;     // input-D
+            this.C = 0;     // input-clock
+            this.Cnext = 0;     // input-clock next
+        }
+
+
+         // calculation of next state of flipflop
+        calc() 
+          {
+                // D flipflop, pozitív élvezérelt
+            if(this.Cnext == 1 && this.C == 0)
+                this.nextQ = this.D;
+            else
+                this.nextQ = this.Q;
+
+
+          }
+
+
+    }
 
      /*
           setTitle()
@@ -211,7 +244,7 @@
 */
 
 
-	}
+
 
 
 
