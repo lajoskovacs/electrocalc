@@ -157,14 +157,14 @@
           {
                 //  SR latch, dominantly Reset
             this.nextQ = this.S && !this.R || !this.R && this.Q;
-
+            this.Q = this.nextQ;
 
           }
 
-
-       
     }
 
+
+    //*********************************************************************************
 
     class FlipflopDG extends FlipflopSR {
         // DG  tároló rajzolása, számolása
@@ -186,12 +186,14 @@
           {
                 //  DG latch
             this.nextQ = this.D && this.G || this.D && this.Q || !this.G && this.Q;
-
+            this.Q = this.nextQ;
 
           }
 
     }
 
+
+    //*********************************************************************************
 
     class FlipflopDC extends FlipflopSR {
         // D tároló rajzolása, számolása
@@ -213,40 +215,17 @@
           {
                 // D flipflop, pozitív élvezérelt
             if(this.Cnext == 1 && this.C == 0)
-                this.nextQ = this.D;
+               { this.nextQ = this.D;  }
             else
-                this.nextQ = this.Q;
-
+               { this.nextQ = this.Q;  }
+            this.Q = this.nextQ;
 
           }
 
 
     }
 
-     /*
-          setTitle()
-          {
-            var label;
-            if(this.type=="SR")
-		        label = "SR tároló  (SR latch)";
-	        else if(this.type=="DG")
-                label = "DG tároló  (DG latch)";
-            else if(this.type=="JK")
-                label = "JK tároló  (JK flipflop)";
-            else if(this.type=="TC")
-                label = "T tároló  (T flipflop)";    
-            else if(this.type=="DC")
-                label = "D tároló  (D flipflop)";
-            this.title = label;
-
-          } 
-
-*/
-
-
-
-
-
+  
 
 </script>
 
