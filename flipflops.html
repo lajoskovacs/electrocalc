@@ -11,11 +11,11 @@
     
         <h3>Tároló típusa</h3> 
         <select name="tarolo" size="1" onchange="flipflopType()">
-                <option value="sr" selected>SR Latch</option>
-                <option value="dg">DG Latch</option>
-                <option value="jk">JK flip-flop</option>
-                <option value="t">T flip-flop</option>
-                <option value="d">D flip-flop</option>		
+                <option value="SR" selected>SR Latch</option>
+                <option value="DG">DG Latch</option>
+                <option value="JK">JK flip-flop</option>
+                <option value="TC">T flip-flop</option>
+                <option value="DC">D flip-flop</option>		
         </select>
         <p> </p>
         <br>		
@@ -27,6 +27,7 @@
  
     var canv1;
     var draw1;
+    var fftype="SR";
       
     var myFlipflop;
         
@@ -48,7 +49,9 @@
         
     function flipflopType()
      {
-
+        fftype=document.valaszt.tarolo.value;	// kiválasztott tároló típus
+        myFlipflop.type=fftype;
+        myFlipflop.draw(draw1);
     }  
         
     //*********************************************************************************
@@ -73,20 +76,20 @@
         
             xu = w/100;
             yu = h/100;
-            if(xu<yu) this.du=xu;       // du -->  drawn unit  !!
-            else this.du=yu;
-		    this.x=x;
-		    this.y=y;
-		    this.width=w;
-		    this.height=h;
-		    this.type=typ;
+            if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
+            else this.du = yu;
+		    this.x = x;
+		    this.y = y;
+		    this.width = w;
+		    this.height = h;
+		    this.type = typ;
+            this.setTitle();
 	    
 	     }
 	     
 
 	     draw(sheet)
 	     {
-            var label1;
             var du=this.du;     // drawing unit
 	
             // style
@@ -99,12 +102,8 @@
  	        sheet.font="25px Arial";
  	
             // flipflop name label
- 	        if(this.type=="SR")
-		        label1 = "SR tároló  (SR latch)";
-	        else if(this.type=="DG")
-                label1 = "DG tároló  (DG latch)";
-	        
-            sheet.fillText(label1,10*du,15*du);
+            this.setTitle();
+            sheet.fillText(this.title,10*du,15*du);
 
             // drawing flipflop
             {
@@ -124,9 +123,9 @@
 	        
 	        // input, output label
 	        sheet.fillStyle = "#221999";
-            sheet.fillText(this.type[0],42*du,53*du);
- 	        sheet.fillText(this.type[1],42*du,83*du);
-            sheet.fillText("Q",60*du,53*du);
+            sheet.fillText(this.type[0],42*du,44*du);
+ 	        sheet.fillText(this.type[1],42*du,74*du);
+            sheet.fillText("Q",60*du,44*du);
 
 
           }
@@ -140,6 +139,24 @@
 		        sheet.closePath();	
                 sheet.stroke();
            }
+
+
+          setTitle()
+          {
+            var label;
+            if(this.type=="SR")
+		        label = "SR tároló  (SR latch)";
+	        else if(this.type=="DG")
+                label = "DG tároló  (DG latch)";
+            else if(this.type=="JK")
+                label = "JK tároló  (JK flipflop)";
+            else if(this.type=="TC")
+                label = "T tároló  (T flipflop)";    
+            else if(this.type=="DC")
+                label = "D tároló  (D flipflop)";
+            this.title = label;
+
+          } 
 
 
 
