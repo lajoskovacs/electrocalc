@@ -42,6 +42,7 @@
            
             myFlipflop = new FlipflopSR();		// tároló létrehozása
             myFlipflop.draw(draw1,0,0,300,300);
+            myFlipflop.drawTruthT(draw1,350,0,300,300);
             
     }
         
@@ -63,6 +64,7 @@
             myFlipflop = new FlipflopJK();
 
             myFlipflop.draw(draw1,0,0,300,300);
+            myFlipflop.drawTruthT(draw1,350,0,300,300);
     }  
         
     //*********************************************************************************
@@ -193,6 +195,44 @@
             this.Q = this.nextQ;
 
           }
+
+
+        drawTruthT(sheet,x,y,w,h)
+        {
+	    // SR  igazságtáblázat kirajzolása
+            var xu; 
+            var yu;
+            var du;
+        
+            xu = w/100;
+            yu = h/100;
+            if(xu<yu) du = xu;       // du -->  drawn unit  !!
+            else du = yu;
+
+            // canvas  x,y coordinates translate
+            sheet.translate(x, y);
+            sheet.clearRect(0,0,w,h);
+
+            sheet.textBaseline = "bottom";
+            sheet.textAlign = "left";
+	        sheet.lineWidth = 3;
+	        sheet.strokeStyle = "#FF0000";	
+            sheet.fillStyle = "#FF0000";
+ 	        sheet.font = "25px Arial";
+ 	
+            // truthtable label
+            sheet.fillText("Igazság táblázat",10*du,10*du);
+
+            // drawing table
+            
+	        for(let i=0;i<4;i++)   
+                this.drawLine(sheet,15+i*15*du,15*du,15+i*15*du,90*du);   // vert. lines
+
+
+            sheet.translate(0,0);  // canvas  x,y coordinates reset
+
+
+        }
 
     }
 
