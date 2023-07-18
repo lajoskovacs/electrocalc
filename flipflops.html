@@ -392,7 +392,7 @@
 
  //*********************************************************************************
 
-    class FlipflopJK extends FlipflopDC {
+    class FlipflopJK extends FlipflopSR {
       // JK tároló rajzolása, számolása, igazságtáblázata
 
         constructor() {
@@ -401,6 +401,8 @@
             this.title = "JK tároló  (JK flipflop)";
             this.J = 0;     // input-J
             this.K = 0;     // input-K
+            this.C = 0;     // input-clock
+            this.Cnext = 0;     // input-clock next
 
             this.truthtable = [
             ["J","K","Qt","Qt+1"],
