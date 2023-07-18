@@ -40,8 +40,8 @@
             draw1 = canv1.getContext("2d");
         
            
-            myFlipflop = new FlipflopSR(0,0,300,300);		// tároló létrehozása
-            myFlipflop.draw(draw1);
+            myFlipflop = new FlipflopSR();		// tároló létrehozása
+            myFlipflop.draw(draw1,0,0,300,300);
             
     }
         
@@ -52,17 +52,17 @@
         fftype=document.valaszt.tarolo.value;	// kiválasztott tároló típus
 
         if(fftype == "SR")
-            myFlipflop = new FlipflopSR(0,0,300,300);
+            myFlipflop = new FlipflopSR();
 	      else if(fftype == "DG")
-            myFlipflop = new FlipflopDG(0,0,300,300);
+            myFlipflop = new FlipflopDG();
         else if(fftype == "DC")
-            myFlipflop = new FlipflopDC(0,0,300,300);   
+            myFlipflop = new FlipflopDC();   
         else if(fftype == "TC")
-            myFlipflop = new FlipflopT(0,0,300,300); 
+            myFlipflop = new FlipflopT(); 
         else if(fftype == "JK")
-            myFlipflop = new FlipflopJK(0,0,300,300);
+            myFlipflop = new FlipflopJK();
 
-        myFlipflop.draw(draw1);
+            myFlipflop.draw(draw1,0,0,300,300);
     }  
         
     //*********************************************************************************
@@ -76,25 +76,13 @@
     //*********************************************************************************
 
 	class FlipflopSR{
-    // SR  tároló rajzolása, számolása
-	    //  x,y  kezdő koordináták (bal-felső sarok)
-	    // w - szélesség,  h - magasság
-	    //  optimális terület ->  300*300
-
-
-        constructor(x,y,w,h){    
-            var xu; 
-            var yu;
-        
-            xu = w/100;
-            yu = h/100;
-            if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
-            else this.du = yu;
-		        this.x = x;
-		        this.y = y;
-		        this.width = w;
-		        this.height = h;
-		        this.type = "SR";
+        // SR  tároló rajzolása, számolása, igazságtáblázat
+        constructor(){    
+		    this.x = 0;
+		    this.y = 0;
+		    this.width = 300;
+		    this.height = 300;
+		    this.type = "SR";
             this.title = "SR tároló  (SR latch)";
             this.S = 0;     // input-S
             this.R = 0;     // input-R
@@ -110,14 +98,32 @@
             ["1","0","0","1"],
             ["1","0","1","1"],
             ["1","1","0","x"],
-            ["1","1","1","x"],]
+            ["1","1","1","x"]]
 	    
-	       }
+	    }
 	     
 
-	      draw(sheet)
-	      {
-            var du=this.du;     // drawing unit
+	    draw(sheet,x,y,w,h)
+	    // SR  tároló rajzolása
+	    //  x,y  kezdő koordináták (bal-felső sarok)
+	    // w - szélesség,  h - magasság
+	    //  optimális terület ->  300*300
+	    
+	     {
+			var xu; 
+            var yu;
+            var du;
+        
+            xu = w/100;
+            yu = h/100;
+            if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
+            else this.du = yu;
+		    this.x = x;
+		    this.y = y;
+		    this.width = w;
+		    this.height = h;  
+			  
+            du=this.du;     // drawing unit
 	
             // canvas  x,y coordinates translate
             sheet.translate(this.x, this.y);
@@ -126,13 +132,14 @@
             this.drawFlipflop(sheet,du); // basic flipflop image
 	        
 	          // input, output label
-	          sheet.fillStyle = "#221999";
+	        sheet.fillStyle = "#221999";
             sheet.fillText(this.type[0],42*du,44*du);
- 	          sheet.fillText(this.type[1],42*du,74*du);
+ 	        sheet.fillText(this.type[1],42*du,74*du);
             sheet.fillText("Q",60*du,44*du);
 
             sheet.translate(0,0);  // canvas  x,y coordinates reset
-        }
+         }
+
 
 
         drawFlipflop(sheet,du)
@@ -141,17 +148,17 @@
             // style
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
-	          sheet.lineWidth=3;
-	          sheet.strokeStyle="#FF0000";	
+	        sheet.lineWidth=3;
+	        sheet.strokeStyle="#FF0000";	
             sheet.fillStyle="#FF0000";
- 	          sheet.font="25px Arial";
+ 	        sheet.font="25px Arial";
  	
             // flipflop name label
             sheet.fillText(this.title,10*du,15*du);
 
             // drawing flipflop
             {
-	              sheet.strokeRect(40*du,30*du,30*du,50*du);      // flipflop rectangle
+	            sheet.strokeRect(40*du,30*du,30*du,50*du);      // flipflop rectangle
                 this.drawLine(sheet,25*du,40*du,40*du,40*du);   //  input_1  
                 this.drawLine(sheet,25*du,70*du,40*du,70*du);   //  input_2
                 
@@ -171,9 +178,9 @@
         drawLine(sheet,x1,y1,x2,y2)
 	      {
             sheet.beginPath();
-		        sheet.moveTo(x1,y1);
-		        sheet.lineTo(x2,y2);      
-		        sheet.closePath();	
+		    sheet.moveTo(x1,y1);
+		    sheet.lineTo(x2,y2);      
+		    sheet.closePath();	
             sheet.stroke();
         }
 
@@ -193,12 +200,10 @@
     //*********************************************************************************
 
     class FlipflopDG extends FlipflopSR {
-        // DG  tároló rajzolása, számolása
-	    //  x,y  kezdő koordináták (bal-felső sarok)
-	    // w - szélesség,  h - magasság
+            // DG  tároló rajzolása, számolása, igazságtáblázata
 
-        constructor(x,y,w,h) {
-            super(x,y,w,h);
+        constructor() {
+            super();
             this.type = "DG";
             this.title = "DG tároló  (D latch)";
             this.D = 0;     // input-D
@@ -222,20 +227,17 @@
     //*********************************************************************************
 
     class FlipflopDC extends FlipflopSR {
-        // D tároló rajzolása, számolása
+        // D tároló rajzolása, számolása, igazságtáblázata
         //  positive edge controll D flipflop
-	    //  x,y  kezdő koordináták (bal-felső sarok)
-	    // w - szélesség,  h - magasság
-
-        constructor(x,y,w,h) {
-            super(x,y,w,h);
+	
+        constructor() {
+            super();
             this.type = "DC";
             this.title = "D tároló  (D flipflop)";
             this.D = 0;     // input-D
             this.C = 0;     // input-clock
             this.Cnext = 0;     // input-clock next
         }
-
 
          // calculation of next state of flipflop
         calc() 
@@ -249,9 +251,24 @@
 
           }
 
-        draw(sheet)
-	      {
-            var du=this.du;     // drawing unit
+        draw(sheet,x,y,w,h){
+	     // D  tároló rajzolása   
+		 //  x,y  kezdő koordináták (bal-felső sarok)
+	     // w - szélesség,  h - magasság  
+            var xu; 
+            var yu;
+            var du;
+        
+            xu = w/100;
+            yu = h/100;
+            if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
+            else this.du = yu;
+		    this.x = x;
+		    this.y = y;
+		    this.width = w;
+		    this.height = h;  
+			  
+            du=this.du;     // drawing unit
 	
             // canvas  x,y coordinates translate
             sheet.translate(this.x, this.y);
@@ -263,9 +280,9 @@
             this.drawLine(sheet,40*du,72*du,45*du,70*du);   // edge clock drawing mark
 	        
 	          // input, output label
-	          sheet.fillStyle = "#221999";
+	        sheet.fillStyle = "#221999";
             sheet.fillText(this.type[0],42*du,44*du);
- 	          sheet.fillText(this.type[1],47*du,74*du);       // letter right shift  !!
+ 	        sheet.fillText(this.type[1],47*du,74*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
 
             sheet.translate(0,0);  // canvas  x,y coordinates reset
@@ -279,13 +296,10 @@
 //*********************************************************************************
 
     class FlipflopT extends FlipflopDC {
-        // T tároló rajzolása, számolása
-        //  positive edge controll T flipflop
-	    //  x,y  kezdő koordináták (bal-felső sarok)
-	    // w - szélesség,  h - magasság
+        // T tároló rajzolása, számolása, igazságtáblázata
 
-        constructor(x,y,w,h) {
-            super(x,y,w,h);
+        constructor() {
+            super();
             this.type = "TC";
             this.title = "T tároló  (T flipflop)";
             this.T = 0;     // input-T
@@ -315,13 +329,10 @@
  //*********************************************************************************
 
     class FlipflopJK extends FlipflopDC {
-        // JK tároló rajzolása, számolása
-        //  positive edge controll JK flipflop
-	    //  x,y  kezdő koordináták (bal-felső sarok)
-	    // w - szélesség,  h - magasság
+      // JK tároló rajzolása, számolása, igazságtáblázata
 
-        constructor(x,y,w,h) {
-            super(x,y,w,h);
+        constructor() {
+            super();
             this.type = "JK";
             this.title = "JK tároló  (JK flipflop)";
             this.J = 0;     // input-J
@@ -352,9 +363,26 @@
         }
 
 
-        draw(sheet)
+        draw(sheet,x,y,w,h)
+        // JK tároló rajzolása
+        //  positive edge controll JK flipflop
+	    //  x,y  kezdő koordináták (bal-felső sarok)
+	    // w - szélesség,  h - magasság
 	      {
-            var du=this.du;     // drawing unit
+            var xu; 
+            var yu;
+            var du;
+        
+            xu = w/100;
+            yu = h/100;
+            if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
+            else this.du = yu;
+		    this.x = x;
+		    this.y = y;
+		    this.width = w;
+		    this.height = h;  
+			  
+            du=this.du;     // drawing unit
 	
             // canvas  x,y coordinates translate
             sheet.translate(this.x, this.y);
@@ -368,9 +396,9 @@
             this.drawLine(sheet,40*du,57*du,45*du,55*du);   // edge clock drawing mark
 	        
 	          // input, output label
-	          sheet.fillStyle = "#221999";
+	        sheet.fillStyle = "#221999";
             sheet.fillText(this.type[0],42*du,44*du);
- 	          sheet.fillText(this.type[1],42*du,74*du);     
+ 	        sheet.fillText(this.type[1],42*du,74*du);     
             sheet.fillText("C",47*du,59*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
 
