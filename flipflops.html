@@ -64,7 +64,7 @@
             myFlipflop = new FlipflopJK();
 
             myFlipflop.draw(draw1,0,0,300,300);
-            myFlipflop.drawTruthT(draw1,350,0,300,300);
+            myFlipflop.drawTruthT(draw1,350,0,350,350);
     }  
         
     //*********************************************************************************
@@ -203,6 +203,8 @@
             var xu; 
             var yu;
             var du;
+            var k=1;
+            var j=1;
         
             xu = w/100;
             yu = h/100;
@@ -217,20 +219,31 @@
             sheet.textAlign = "left";
 	        sheet.lineWidth = 3;
 	        sheet.strokeStyle = "#FF0000";	
-            sheet.fillStyle = "#FF0000";
+            sheet.fillStyle = "#0000FF";
  	        sheet.font = "25px Arial";
  	
             // truthtable label
             sheet.fillText("Igazság táblázat",10*du,10*du);
 
             // drawing table
-            
-	        for(let i=0;i<4;i++)   
-                this.drawLine(sheet,15+i*15*du,15*du,15+i*15*du,90*du);   // vert. lines
+	        for(let i=1;i<5;i++)   
+                this.drawLine(sheet,i*17*du,15*du,i*17*du,90*du);   // vert. lines
 
+            sheet.font = "18px Arial";
+            k=1;
+            for (let rowtt of this.truthtable)
+            {
+                j=1;
+                for (let valuett of rowtt)
+                {
+                    sheet.fillText(valuett,4*du+j*17*du,15*du+k*8*du);
+                    j++;        // col
+                }
+                this.drawLine(sheet,17*du,15*du+k*8*du,85*du,15*du+k*8*du);   // hor. lines
+                k++;            // row
+            }
 
             sheet.translate(0,0);  // canvas  x,y coordinates reset
-
 
         }
 
