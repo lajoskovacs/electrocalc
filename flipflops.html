@@ -300,6 +300,8 @@
 
     }
 
+ //*********************************************************************************
+
     class FlipflopJK extends FlipflopDC {
         // JK tároló rajzolása, számolása
         //  positive edge controll JK flipflop
@@ -334,6 +336,30 @@
         }
 
 
+        draw(sheet)
+	      {
+            var du=this.du;     // drawing unit
+	
+            // canvas  x,y coordinates translate
+            sheet.translate(this.x, this.y);
+            sheet.clearRect(0,0,this.width,this.height);
+
+            this.drawFlipflop(sheet,du); // basic flipflop image
+
+            // third input (clock)
+            this.drawLine(sheet,25*du,55*du,40*du,55*du);   //  input_3
+            this.drawLine(sheet,40*du,53*du,45*du,55*du);   //  edge clock drawing mark
+            this.drawLine(sheet,40*du,57*du,45*du,55*du);   // edge clock drawing mark
+	        
+	          // input, output label
+	          sheet.fillStyle = "#221999";
+            sheet.fillText(this.type[0],42*du,44*du);
+ 	          sheet.fillText(this.type[1],42*du,74*du);     
+            sheet.fillText("C",47*du,59*du);       // letter right shift  !!
+            sheet.fillText("Q",60*du,44*du);
+
+            sheet.translate(0,0);  // canvas  x,y coordinates reset
+        }
 
 
 
