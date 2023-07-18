@@ -42,7 +42,7 @@
            
             myFlipflop = new FlipflopSR();		// tároló létrehozása
             myFlipflop.draw(draw1,0,0,300,300);
-            myFlipflop.drawTruthT(draw1,350,0,300,300);
+            myFlipflop.drawTruthT(draw1,350,0,350,350);
             
     }
         
@@ -100,7 +100,7 @@
             ["1","0","0","1"],
             ["1","0","1","1"],
             ["1","1","0","x"],
-            ["1","1","1","x"]]
+            ["1","1","1","x"]];
 	    
 	    }
 	     
@@ -139,7 +139,7 @@
  	        sheet.fillText(this.type[1],42*du,74*du);
             sheet.fillText("Q",60*du,44*du);
 
-            sheet.translate(0,0);  // canvas  x,y coordinates reset
+            sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates reset
          }
 
 
@@ -243,7 +243,7 @@
                 k++;            // row
             }
 
-            sheet.translate(0,0);  // canvas  x,y coordinates reset
+            sheet.translate(-x, -y);   // canvas  x,y coordinates reset
 
         }
 
