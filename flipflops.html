@@ -61,6 +61,7 @@
             myFlipflop = new FlipflopT(0,0,300,300); 
         else if(fftype == "JK")
             myFlipflop = new FlipflopJK(0,0,300,300);
+
         myFlipflop.draw(draw1);
     }  
         
@@ -98,7 +99,18 @@
             this.S = 0;     // input-S
             this.R = 0;     // input-R
             this.Q = 0;     // output-Q, present state
-            this.nextQ = 0;     // next state, 
+            this.nextQ = 0;     // next state
+
+            this.truthtable = [
+            ["S","R","Qt","Qt+1"],
+            ["0","0","0","0"],
+            ["0","0","1","1"],
+            ["0","1","0","0"],
+            ["0","1","1","0"],
+            ["1","0","0","1"],
+            ["1","0","1","1"],
+            ["1","1","0","x"],
+            ["1","1","1","x"],]
 	    
 	       }
 	     
