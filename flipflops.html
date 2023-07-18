@@ -301,6 +301,14 @@
             this.D = 0;     // input-D
             this.C = 0;     // input-clock
             this.Cnext = 0;     // input-clock next
+
+            this.truthtable = [
+            ["D","Qt","Qt+1"],
+            ["0","0","0"],
+            ["0","1","0"],
+            ["1","0","1"],
+            ["1","1","1"]];
+
         }
 
          // calculation of next state of flipflop
@@ -368,6 +376,13 @@
             this.title = "T tároló  (T flipflop)";
             this.T = 0;     // input-T
             
+            this.truthtable = [
+            ["T","Qt","Qt+1"],
+            ["0","0","0"],
+            ["0","1","1"],
+            ["1","0","1"],
+            ["1","1","0"]];
+
         }
 
 
