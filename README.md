@@ -8,3 +8,5 @@ voltdiv.html  --  voltage divider (R) calculations
 RLCdiv.kv.py  --  RLC voltage divider calculations
 
 logicgates.html  --  operation of logic gates
+
+flipflops.html --  SR, JK, T, D and DG flipflops
