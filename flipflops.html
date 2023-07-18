@@ -321,13 +321,17 @@
          // calculation of next state of flipflop
         calc() 
         {
-            // T flipflop, pozitív élvezérelt
+            // JK flipflop, pozitív élvezérelt
             if(this.Cnext == 1 && this.C == 0)  // positive clock edge
             { 
-                if(this.T == 1)  
+                if(this.J == 1 && this.K == 1)    // inverz
                   { this.nextQ = !this.Q;  }
+                else if(this.J == 1 && this.K == 0)   // set
+                  { this.nextQ = 1;  }  
+                else if(this.J == 0 && this.K == 1)  // reset
+                  { this.nextQ = 0;  }   
                 else
-                  { this.nextQ = this.Q;  }
+                  { this.nextQ = this.Q;  }     // store
             }
             else
                { this.nextQ = this.Q;  }
@@ -360,10 +364,6 @@
 
             sheet.translate(0,0);  // canvas  x,y coordinates reset
         }
-
-
-
-
 
     }
 
