@@ -59,7 +59,8 @@
             myFlipflop = new FlipflopDC(0,0,300,300);   
         else if(fftype == "TC")
             myFlipflop = new FlipflopT(0,0,300,300); 
-      
+        else if(fftype == "JK")
+            myFlipflop = new FlipflopJK(0,0,300,300);
         myFlipflop.draw(draw1);
     }  
         
@@ -296,6 +297,47 @@
             this.Q = this.nextQ;
 
           }
+
+    }
+
+    class FlipflopJK extends FlipflopDC {
+        // JK tároló rajzolása, számolása
+        //  positive edge controll JK flipflop
+	    //  x,y  kezdő koordináták (bal-felső sarok)
+	    // w - szélesség,  h - magasság
+
+        constructor(x,y,w,h) {
+            super(x,y,w,h);
+            this.type = "JK";
+            this.title = "JK tároló  (JK flipflop)";
+            this.J = 0;     // input-J
+            this.K = 0;     // input-K
+            
+        }
+
+
+         // calculation of next state of flipflop
+        calc() 
+        {
+            // T flipflop, pozitív élvezérelt
+            if(this.Cnext == 1 && this.C == 0)  // positive clock edge
+            { 
+                if(this.T == 1)  
+                  { this.nextQ = !this.Q;  }
+                else
+                  { this.nextQ = this.Q;  }
+            }
+            else
+               { this.nextQ = this.Q;  }
+            this.Q = this.nextQ;
+
+        }
+
+
+
+
+
+
 
     }
 
