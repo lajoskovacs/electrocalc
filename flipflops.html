@@ -112,7 +112,7 @@
 	    //  optimális terület ->  300*300
 	    
 	     {
-			var xu; 
+			      var xu; 
             var yu;
             var du;
         
@@ -120,10 +120,10 @@
             yu = h/100;
             if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
             else this.du = yu;
-		    this.x = x;
-		    this.y = y;
-		    this.width = w;
-		    this.height = h;  
+		        this.x = x;
+		        this.y = y;
+		        this.width = w;
+		        this.height = h;  
 			  
             du=this.du;     // drawing unit
 	
@@ -134,11 +134,12 @@
             this.drawFlipflop(sheet,du); // basic flipflop image
 	        
 	          // input, output label
-	        sheet.fillStyle = "#221999";
+	          sheet.fillStyle = "#221999";
             sheet.fillText(this.type[0],42*du,44*du);
- 	        sheet.fillText(this.type[1],42*du,74*du);
+ 	          sheet.fillText(this.type[1],42*du,74*du);
             sheet.fillText("Q",60*du,44*du);
 
+            this.drawInpOutp(sheet,du); // input and output  draw
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates reset
          }
 
@@ -150,17 +151,17 @@
             // style
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
-	        sheet.lineWidth=3;
-	        sheet.strokeStyle="#FF0000";	
+	          sheet.lineWidth=3;
+	          sheet.strokeStyle="#FF0000";	
             sheet.fillStyle="#FF0000";
- 	        sheet.font="25px Arial";
+ 	          sheet.font="25px Arial";
  	
             // flipflop name label
             sheet.fillText(this.title,10*du,15*du);
 
             // drawing flipflop
             {
-	            sheet.strokeRect(40*du,30*du,30*du,50*du);      // flipflop rectangle
+	              sheet.strokeRect(40*du,30*du,30*du,50*du);      // flipflop rectangle
                 this.drawLine(sheet,25*du,40*du,40*du,40*du);   //  input_1  
                 this.drawLine(sheet,25*du,70*du,40*du,70*du);   //  input_2
                 
@@ -176,13 +177,42 @@
 
         }
 
+        drawInpOutp(sheet,du)
+        {
+            let notQ;
+
+            sheet.strokeStyle="#000FF";	
+            sheet.fillStyle="#BBBB99";
+ 	         
+            sheet.fillRect(12*du,35*du,10*du,10*du);    // input 1
+            sheet.fillRect(12*du,65*du,10*du,10*du);    // input 2
+            sheet.fillRect(88*du,35*du,10*du,10*du);    // output 1
+            sheet.fillRect(88*du,65*du,10*du,10*du);    // output 2
+
+      
+            sheet.font="22px Arial";
+            sheet.fillStyle="#0000FF";
+
+            sheet.fillText(this.S,14*du,44*du);
+            sheet.fillText(this.R,14*du,74*du);
+
+            sheet.fillStyle="#FF0000";
+            if(this.Q)  notQ=0;
+            else notQ=1;
+            sheet.fillText(this.Q,90*du,44*du);
+            sheet.fillText(notQ,90*du,74*du);
+
+
+
+        }
+
 
         drawLine(sheet,x1,y1,x2,y2)
 	      {
             sheet.beginPath();
-		    sheet.moveTo(x1,y1);
-		    sheet.lineTo(x2,y2);      
-		    sheet.closePath();	
+		        sheet.moveTo(x1,y1);
+		        sheet.lineTo(x2,y2);      
+		        sheet.closePath();	
             sheet.stroke();
         }
 
@@ -217,16 +247,16 @@
 
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
-	        sheet.lineWidth = 3;
-	        sheet.strokeStyle = "#FF0000";	
+	          sheet.lineWidth = 3;
+	          sheet.strokeStyle = "#FF0000";	
             sheet.fillStyle = "#0000FF";
- 	        sheet.font = "25px Arial";
+ 	          sheet.font = "25px Arial";
  	
             // truthtable label
             sheet.fillText("Igazság táblázat",10*du,10*du);
 
             // drawing table
-	        for(let i=1;i<5;i++)   
+	          for(let i=1;i<5;i++)   
                 this.drawLine(sheet,i*17*du,15*du,i*17*du,90*du);   // vert. lines
 
             sheet.font = "18px Arial";
@@ -324,9 +354,9 @@
           }
 
         draw(sheet,x,y,w,h){
-	     // D  tároló rajzolása   
-		 //  x,y  kezdő koordináták (bal-felső sarok)
-	     // w - szélesség,  h - magasság  
+	          // D  tároló rajzolása   
+		         //  x,y  kezdő koordináták (bal-felső sarok)
+	          // w - szélesség,  h - magasság  
             var xu; 
             var yu;
             var du;
@@ -335,10 +365,10 @@
             yu = h/100;
             if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
             else this.du = yu;
-		    this.x = x;
-		    this.y = y;
-		    this.width = w;
-		    this.height = h;  
+		        this.x = x;
+		        this.y = y;
+		        this.width = w;
+		        this.height = h;  
 			  
             du=this.du;     // drawing unit
 	
@@ -352,17 +382,18 @@
             this.drawLine(sheet,40*du,72*du,45*du,70*du);   // edge clock drawing mark
 	        
 	          // input, output label
-	        sheet.fillStyle = "#221999";
+	          sheet.fillStyle = "#221999";
             sheet.fillText(this.type[0],42*du,44*du);
- 	        sheet.fillText(this.type[1],47*du,74*du);       // letter right shift  !!
+ 	          sheet.fillText(this.type[1],47*du,74*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
 
+            this.drawInpOutp(sheet,du); // input and output  draw
             sheet.translate(0,0);  // canvas  x,y coordinates reset
         }
 
         drawTruthT(sheet,x,y,w,h)
         {
-	    // D  igazságtáblázat kirajzolása
+	         // D  igazságtáblázat kirajzolása
             var xu; 
             var yu;
             var du;
@@ -380,16 +411,16 @@
 
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
-	        sheet.lineWidth = 3;
-	        sheet.strokeStyle = "#FF0000";	
+	          sheet.lineWidth = 3;
+	          sheet.strokeStyle = "#FF0000";	
             sheet.fillStyle = "#0000FF";
- 	        sheet.font = "25px Arial";
+ 	          sheet.font = "25px Arial";
  	
             // truthtable label
             sheet.fillText("Igazság táblázat",10*du,10*du);
 
             // drawing table
-	        for(let i=1;i<4;i++)   
+	          for(let i=1;i<4;i++)   
                 this.drawLine(sheet,i*17*du,15*du,i*17*du,55*du);   // vert. lines
 
             sheet.font = "18px Arial";
@@ -504,10 +535,10 @@
 
 
         draw(sheet,x,y,w,h)
-        // JK tároló rajzolása
-        //  positive edge controll JK flipflop
-	    //  x,y  kezdő koordináták (bal-felső sarok)
-	    // w - szélesség,  h - magasság
+          // JK tároló rajzolása
+          //  positive edge controll JK flipflop
+	       //  x,y  kezdő koordináták (bal-felső sarok)
+	       // w - szélesség,  h - magasság
 	      {
             var xu; 
             var yu;
@@ -517,10 +548,10 @@
             yu = h/100;
             if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
             else this.du = yu;
-		    this.x = x;
-		    this.y = y;
-		    this.width = w;
-		    this.height = h;  
+		        this.x = x;
+		        this.y = y;
+		        this.width = w;
+		        this.height = h;  
 			  
             du=this.du;     // drawing unit
 	
@@ -536,12 +567,13 @@
             this.drawLine(sheet,40*du,57*du,45*du,55*du);   // edge clock drawing mark
 	        
 	          // input, output label
-	        sheet.fillStyle = "#221999";
+	          sheet.fillStyle = "#221999";
             sheet.fillText(this.type[0],42*du,44*du);
- 	        sheet.fillText(this.type[1],42*du,74*du);     
+ 	          sheet.fillText(this.type[1],42*du,74*du);     
             sheet.fillText("C",47*du,59*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
 
+            this.drawInpOutp(sheet,du); // input and output  draw
             sheet.translate(0,0);  // canvas  x,y coordinates reset
         }
 
