@@ -30,6 +30,11 @@
     var fftype="SR";
       
     var myFlipflop;
+    var input1;
+    var input2;
+    var inpclock;
+    var output1;
+    var output2;
         
         
     //*********************************************************************************
@@ -43,6 +48,8 @@
             myFlipflop = new FlipflopSR();		// tároló létrehozása
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
+            input1 = new Button(draw1,"Hi",50,50);
+            input1.draw();
             
     }
         
@@ -578,6 +585,43 @@
         }
 
     }
+
+
+    class Button {
+        // nyomógomb, be- és kimenetek módosításához
+
+        constructor(sheet,text="",x=0,y=0) {
+            this.sheet = sheet;
+            this.text = text;
+            this.x = x;
+            this.y = y;
+            this.textcolor = "#0000FF";
+            this.backcolor = "#BBBB99";  
+            this.width = 40;
+            this.height = 40;
+            this.font = "22px Arial";
+        }
+
+        draw()
+        {
+  
+            this.sheet.fillStyle=this.backcolor;
+            this.sheet.fillRect(this.x,this.y,this.width,this.height);    // button shape
+
+            this.sheet.textBaseline = "bottom";
+            this. sheet.textAlign = "left";
+            this.sheet.font = "this.font";
+            this.sheet.fillStyle = this.textcolor;
+            this.sheet.fillText(this.text,this.x,this.y+this.height);             // button text
+    
+
+         
+        }
+
+
+
+    }
+
 
 
 </script>
