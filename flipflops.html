@@ -78,6 +78,18 @@
         
     function clickCanv()
     {
+        var x;
+	    var y;
+	
+	    x = event.offsetX;   // egérklikk X koordináta
+	    y = event.offsetY;   // egérklikk Y koordináta
+	
+	 
+	    if((x>xvaszon-75) && (x<xvaszon-10) && (y>yk.ylent3) && (y<yk.ylent3+30)) // click input1 button
+	    {
+		    	
+	    } 
+
 
     }     
 
@@ -597,8 +609,8 @@
             this.y = y;
             this.textcolor = "#0000FF";
             this.backcolor = "#BBBB99";  
-            this.width = 40;
-            this.height = 40;
+            this.width = 30;
+            this.height = 30;
             this.font = "22px Arial";
         }
 
@@ -608,14 +620,33 @@
             this.sheet.fillStyle=this.backcolor;
             this.sheet.fillRect(this.x,this.y,this.width,this.height);    // button shape
 
-            this.sheet.textBaseline = "bottom";
-            this. sheet.textAlign = "left";
+            this.sheet.textBaseline = "middle";
+            this. sheet.textAlign = "center";
             this.sheet.font = "this.font";
             this.sheet.fillStyle = this.textcolor;
-            this.sheet.fillText(this.text,this.x,this.y+this.height);             // button text
+            this.sheet.fillText(this.text,this.x+this.width/2,this.y+this.height/2);             // button text
     
+        }
 
-         
+        getX(){
+            return this.x;
+        }
+        setX(x){
+            this.x = x;
+        }
+
+        getY(){
+            return this.y;
+        }
+        setY(y){
+            this.y = y;
+        }
+
+        getText(){
+            return this.text;
+        }
+        setText(t){
+            this.text = t;
         }
 
 
