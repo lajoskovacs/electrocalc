@@ -42,7 +42,7 @@
         
            
             myFlipflop = new FlipflopSR(draw1);		// tároló létrehozása
-            myFlipflop.draw(draw1,0,0,300,300);
+            myFlipflop.draw(draw1,0,50,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
          
             
@@ -65,7 +65,7 @@
         else if(fftype == "JK")
             myFlipflop = new FlipflopJK(draw1);
 
-            myFlipflop.draw(draw1,0,0,300,300);
+            myFlipflop.draw(draw1,0,50,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
     }  
         
@@ -106,6 +106,7 @@
             this.R = 0;     // input-R
             this.Q = 0;     // output-Q, present state
             this.nextQ = 0;     // next state
+            this.du = 1;
 
             this.truthtable = [
             ["S","R","Qt","Qt+1"],
@@ -134,7 +135,7 @@
 	    //  optimális terület ->  300*300
 	    
 	     {
-			      var xu; 
+			var xu; 
             var yu;
             var du;
         
@@ -153,7 +154,7 @@
             sheet.translate(this.x, this.y);
             sheet.clearRect(0,0,this.width,this.height);
 
-            this.drawFlipflop(sheet,du); // basic flipflop image
+            this.drawFlipflop(sheet); // basic flipflop image
 	        
 	          // input, output label
 	          sheet.fillStyle = "#221999";
@@ -161,15 +162,18 @@
  	          sheet.fillText(this.type[1],42*du,74*du);
             sheet.fillText("Q",60*du,44*du);
 
-            this.drawInpOutp(sheet,du); // input and output buttons draw
-            sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates reset
+            sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates 
+            this.drawInpOutp(sheet); // input and output buttons draw
+
          }
 
 
 
-        drawFlipflop(sheet,du)
+        drawFlipflop(sheet)
         {
 
+            var du;
+            du = this.du;     // drawing unit
             // style
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
@@ -199,8 +203,11 @@
 
         }
 
-        drawInpOutp(sheet,du)
+
+        drawInpOutp(sheet)
         {
+            var du;
+            du = this.du;     // drawing unit
             let notQ;
 
             this.input1.setText(this.S.toString());
@@ -389,7 +396,7 @@
             sheet.translate(this.x, this.y);
             sheet.clearRect(0,0,this.width,this.height);
 
-            this.drawFlipflop(sheet,du); // basic flipflop image
+            this.drawFlipflop(sheet); // basic flipflop image
 
             this.drawLine(sheet,40*du,68*du,45*du,70*du);   //  edge clock drawing mark
             this.drawLine(sheet,40*du,72*du,45*du,70*du);   // edge clock drawing mark
@@ -400,8 +407,8 @@
  	          sheet.fillText(this.type[1],47*du,74*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
 
-            this.drawInpOutp(sheet,du); // input and output  draw
-            sheet.translate(0,0);  // canvas  x,y coordinates reset
+            sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
+            this.drawInpOutp(sheet); // input and output buttons draw
         }
 
         drawTruthT(sheet,x,y,w,h)
@@ -572,7 +579,7 @@
             sheet.translate(this.x, this.y);
             sheet.clearRect(0,0,this.width,this.height);
 
-            this.drawFlipflop(sheet,du); // basic flipflop image
+            this.drawFlipflop(sheet); // basic flipflop image
 
             // third input (clock)
             this.drawLine(sheet,25*du,55*du,40*du,55*du);   //  input_3
@@ -586,8 +593,8 @@
             sheet.fillText("C",47*du,59*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
 
-            this.drawInpOutp(sheet,du); // input and output  draw
-            sheet.translate(0,0);  // canvas  x,y coordinates reset
+            sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
+            this.drawInpOutp(sheet); // input and output buttons draw
         }
 
     }
