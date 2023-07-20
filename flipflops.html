@@ -84,10 +84,10 @@
 	    x = event.offsetX;   // egérklikk X koordináta
 	    y = event.offsetY;   // egérklikk Y koordináta
 	
-	 
-	    if((x>xvaszon-75) && (x<xvaszon-10) && (y>yk.ylent3) && (y<yk.ylent3+30)) // click input1 button
+        
+	    if((x>input1.getX) && (x<(input1.getX+input1.getWidth)) && (y>input1.getY) && (y<(input1.getY+input1.getHeight)) // click input1 button
 	    {
-		    	
+		    	input1.change();
 	    } 
 
 
@@ -628,6 +628,13 @@
     
         }
 
+        change(){
+
+
+
+        }
+
+
         getX(){
             return this.x;
         }
@@ -647,6 +654,20 @@
         }
         setText(t){
             this.text = t;
+        }
+
+        getWidth(){
+            return this.width;
+        }
+        setWidth(w){
+            this.width = w;
+        }
+
+        getHeight(){
+            return this.height;
+        }
+        setHeight(h){
+            this.height = h;
         }
 
 
