@@ -83,7 +83,7 @@
 	    if(myFlipflop.input1.isclick(x,y))
         {
             myFlipflop.input1.setText("OK");
-            myFlipflop.input1.draw();
+            myFlipflop.draw(draw1,0,0,300,300);
 
         }
             
@@ -119,11 +119,11 @@
             ["1","1","0","x"],
             ["1","1","1","x"]];
 
-            this.input1 = new Button(sheet,"1",10,50);
-            this.input2 = new Button(sheet,"2",10,90);
-            this.inpclock = new Button(sheet,"c",10,130);
-            this.output1  = new Button(sheet,"Q",10,170);
-            this.output2 = new Button(sheet,"nQ",10,210);
+            this.input1 = new Button();
+            this.input2 = new Button();
+            this.inpclock = new Button();
+            this.output1  = new Button();
+            this.output2 = new Button();
 	    
 	    }
 	     
@@ -204,28 +204,19 @@
         {
             let notQ;
 
-            sheet.strokeStyle="#000FF";	
-            sheet.fillStyle="#BBBB99";
- 	         
-            sheet.fillRect(12*du,35*du,10*du,10*du);    // input 1
-            sheet.fillRect(12*du,65*du,10*du,10*du);    // input 2
-            sheet.fillRect(88*du,35*du,10*du,10*du);    // output 1
-            sheet.fillRect(88*du,65*du,10*du,10*du);    // output 2
-
-      
-            sheet.font="22px Arial";
-            sheet.fillStyle="#0000FF";
-
-            sheet.fillText(this.S,14*du,44*du);
-            sheet.fillText(this.R,14*du,74*du);
-
-            sheet.fillStyle="#FF0000";
+            this.input1.setText = this.S;
+            this.input2.setText = this.R;
+            this.output1.setText = this.Q;
             if(this.Q)  notQ=0;
             else notQ=1;
-            sheet.fillText(this.Q,90*du,44*du);
-            sheet.fillText(notQ,90*du,74*du);
+            this.output2.setText = notQ;
 
-
+            this.input1.draw(sheet,this.x+12*du,this.y+35*du,10*du,10*du);   // input 1
+            this.input2.draw(sheet,this.x+12*du,this.y+65*du,10*du,10*du);   // input 2
+            
+            this.output1.draw(sheet,this.x+88*du,this.y+35*du,10*du,10*du);   // output 1
+            this.output2.draw(sheet,this.x+88*du,this.y+65*du,10*du,10*du);   // output 2
+   
 
         }
 
@@ -606,25 +597,29 @@
     class Button {
         // nyomógomb, be- és kimenetek módosításához
 
-        constructor(sheet,text="",x=0,y=0) {
-            this.sheet = sheet;
+        constructor(text="",color = "#0000FF",bg = "#BBBB99") {
+        
             this.text = text;
-            this.x = x;
-            this.y = y;
-            this.textcolor = "#0000FF";
-            this.backcolor = "#BBBB99";  
+            this.textcolor = color;
+            this.backcolor = bg;
+            this.x = 0;
+            this.y = 0; 
             this.width = 30;
             this.height = 30;
             this.font = "22px Arial";
-            this.draw();
+           //  this.draw();
         }
 
-        draw()
+        draw(sheet,x=0,y=0,w=30,h=30)
         {
+            this.sheet = sheet;
+            this.x = x;
+            this.y = y;
+            this.width = w;
+            this.height = h;
   
             this.sheet.fillStyle=this.backcolor;
             this.sheet.fillRect(this.x,this.y,this.width,this.height);    // button shape
-
             this.sheet.textBaseline = "middle";
             this. sheet.textAlign = "center";
             this.sheet.font = "this.font";
