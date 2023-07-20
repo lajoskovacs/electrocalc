@@ -30,11 +30,7 @@
     var fftype="SR";
       
     var myFlipflop;
-    var input1;
-    var input2;
-    var inpclock;
-    var output1;
-    var output2;
+
         
         
     //*********************************************************************************
@@ -45,11 +41,10 @@
             draw1 = canv1.getContext("2d");
         
            
-            myFlipflop = new FlipflopSR();		// tároló létrehozása
+            myFlipflop = new FlipflopSR(draw1);		// tároló létrehozása
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
-            input1 = new Button(draw1,"Hi",50,50);
-            input1.draw();
+         
             
     }
         
@@ -60,15 +55,15 @@
         fftype=document.valaszt.tarolo.value;	// kiválasztott tároló típus
 
         if(fftype == "SR")
-            myFlipflop = new FlipflopSR();
+            myFlipflop = new FlipflopSR(draw1);
 	      else if(fftype == "DG")
-            myFlipflop = new FlipflopDG();
+            myFlipflop = new FlipflopDG(draw1);
         else if(fftype == "DC")
-            myFlipflop = new FlipflopDC();   
+            myFlipflop = new FlipflopDC(draw1);   
         else if(fftype == "TC")
-            myFlipflop = new FlipflopT(); 
+            myFlipflop = new FlipflopT(draw1); 
         else if(fftype == "JK")
-            myFlipflop = new FlipflopJK();
+            myFlipflop = new FlipflopJK(draw1);
 
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
@@ -85,10 +80,10 @@
 	    y = event.offsetY;   // egérklikk Y koordináta
 	
         
-	    if(input1.isclick(x,y))
+	    if(myFlipflop.input1.isclick(x,y))
         {
-            input1.setText("OK");
-            input1.draw();
+            myFlipflop.input1.setText("OK");
+            myFlipflop.input1.draw();
 
         }
             
@@ -101,7 +96,7 @@
 
 	class FlipflopSR{
         // SR  tároló rajzolása, számolása, igazságtáblázat
-        constructor(){    
+        constructor(sheet){    
 		    this.x = 0;
 		    this.y = 0;
 		    this.width = 300;
@@ -123,6 +118,12 @@
             ["1","0","1","1"],
             ["1","1","0","x"],
             ["1","1","1","x"]];
+
+            this.input1 = new Button(sheet,"1",10,50);
+            this.input2 = new Button(sheet,"2",10,90);
+            this.inpclock = new Button(sheet,"c",10,130);
+            this.output1  = new Button(sheet,"Q",10,170);
+            this.output2 = new Button(sheet,"nQ",10,210);
 	    
 	    }
 	     
@@ -307,8 +308,8 @@
     class FlipflopDG extends FlipflopSR {
             // DG  tároló rajzolása, számolása, igazságtáblázata
 
-        constructor() {
-            super();
+        constructor(sheet) {
+            super(sheet);
             this.type = "DG";
             this.title = "DG tároló  (D latch)";
             this.D = 0;     // input-D
@@ -346,8 +347,8 @@
         // D tároló rajzolása, számolása, igazságtáblázata
         //  positive edge controll D flipflop
 	
-        constructor() {
-            super();
+        constructor(sheet) {
+            super(sheet);
             this.type = "DC";
             this.title = "D tároló  (D flipflop)";
             this.D = 0;     // input-D
@@ -471,8 +472,8 @@
     class FlipflopT extends FlipflopDC {
         // T tároló rajzolása, számolása, igazságtáblázata
 
-        constructor() {
-            super();
+        constructor(sheet) {
+            super(sheet);
             this.type = "TC";
             this.title = "T tároló  (T flipflop)";
             this.T = 0;     // input-T
@@ -511,8 +512,8 @@
     class FlipflopJK extends FlipflopSR {
       // JK tároló rajzolása, számolása, igazságtáblázata
 
-        constructor() {
-            super();
+        constructor(sheet) {
+            super(sheet);
             this.type = "JK";
             this.title = "JK tároló  (JK flipflop)";
             this.J = 0;     // input-J
@@ -615,6 +616,7 @@
             this.width = 30;
             this.height = 30;
             this.font = "22px Arial";
+            this.draw();
         }
 
         draw()
