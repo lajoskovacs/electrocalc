@@ -85,7 +85,7 @@
 	    y = event.offsetY;   // egérklikk Y koordináta
 	
         
-	    if((x>input1.getX) && (x<(input1.getX+input1.getWidth)) && (y>input1.getY) && (y<(input1.getY+input1.getHeight)) // click input1 button
+	    if((x>input1.getX) && (x<(input1.getX+input1.getWidth)) && (y>input1.getY) && (y<(input1.getY+input1.getHeight))) // click input1 button
 	    {
 		    	input1.change();
 	    } 
@@ -628,9 +628,11 @@
     
         }
 
-        change(){
-
-
+        isclick(x,y){
+            // ezen a nyomó gombon volt e egér kattintás
+            if((x>this.x) && (x<(this.x+this.width)) && (y>this.y) && (y<(this.y+this.height))) // click  button
+                return 1;
+            else return 0;
 
         }
 
