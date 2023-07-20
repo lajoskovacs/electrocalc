@@ -42,7 +42,7 @@
         
            
             myFlipflop = new FlipflopSR(draw1);		// tároló létrehozása
-            myFlipflop.draw(draw1,0,50,300,300);
+            myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
          
             
@@ -65,7 +65,7 @@
         else if(fftype == "JK")
             myFlipflop = new FlipflopJK(draw1);
 
-            myFlipflop.draw(draw1,0,50,300,300);
+            myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
     }  
         
@@ -82,7 +82,7 @@
         
 	    if(myFlipflop.input1.isclick(x,y))
         {
-           // myFlipflop.input1.setText("OK");
+            myFlipflop.input1Changed(draw1);
            
         }
             
@@ -204,6 +204,17 @@
         }
 
 
+
+        drawLine(sheet,x1,y1,x2,y2)
+	      {
+            sheet.beginPath();
+		        sheet.moveTo(x1,y1);
+		        sheet.lineTo(x2,y2);      
+		        sheet.closePath();	
+            sheet.stroke();
+        }
+
+
         drawInpOutp(sheet)
         {
             var du;
@@ -227,15 +238,6 @@
         }
 
 
-        drawLine(sheet,x1,y1,x2,y2)
-	      {
-            sheet.beginPath();
-		        sheet.moveTo(x1,y1);
-		        sheet.lineTo(x2,y2);      
-		        sheet.closePath();	
-            sheet.stroke();
-        }
-
 
         // calculation of next state of flipflop
         calc() 
@@ -245,6 +247,18 @@
             this.Q = this.nextQ;
 
           }
+
+
+        input1Changed(sheet)    // S input 
+        {
+            if(this.S==1)  this.S=0;    //  inverz  S
+            else this.S=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
 
 
         drawTruthT(sheet,x,y,w,h)
