@@ -85,10 +85,13 @@
 	    y = event.offsetY;   // egérklikk Y koordináta
 	
         
-	    if((x>input1.getX) && (x<(input1.getX+input1.getWidth)) && (y>input1.getY) && (y<(input1.getY+input1.getHeight))) // click input1 button
-	    {
-		    	input1.change();
-	    } 
+	    if(input1.isclick(x,y))
+        {
+            input1.setText("OK");
+            input1.draw();
+
+        }
+            
 
 
     }     
