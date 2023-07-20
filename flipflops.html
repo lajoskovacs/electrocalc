@@ -82,9 +82,8 @@
         
 	    if(myFlipflop.input1.isclick(x,y))
         {
-            myFlipflop.input1.setText("OK");
-            myFlipflop.draw(draw1,0,0,300,300);
-
+           // myFlipflop.input1.setText("OK");
+           
         }
             
 
@@ -162,7 +161,7 @@
  	          sheet.fillText(this.type[1],42*du,74*du);
             sheet.fillText("Q",60*du,44*du);
 
-            this.drawInpOutp(sheet,du); // input and output  draw
+            this.drawInpOutp(sheet,du); // input and output buttons draw
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates reset
          }
 
@@ -204,12 +203,12 @@
         {
             let notQ;
 
-            this.input1.setText = this.S;
-            this.input2.setText = this.R;
-            this.output1.setText = this.Q;
+            this.input1.setText(this.S.toString());
+            this.input2.setText(this.R.toString());
+            this.output1.setText(this.Q.toString());
             if(this.Q)  notQ=0;
             else notQ=1;
-            this.output2.setText = notQ;
+            this.output2.setText(notQ.toString());
 
             this.input1.draw(sheet,this.x+12*du,this.y+35*du,10*du,10*du);   // input 1
             this.input2.draw(sheet,this.x+12*du,this.y+65*du,10*du,10*du);   // input 2
