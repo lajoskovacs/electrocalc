@@ -86,6 +86,12 @@
            
         }
             
+        if(myFlipflop.input2.isclick(x,y))
+        {
+            myFlipflop.input2Changed(draw1);
+           
+        }
+
 
 
     }     
@@ -263,6 +269,16 @@
         }
 
 
+        input2Changed(sheet)    // R input 
+        {
+            if(this.R==1)  this.R=0;    //  inverz  R
+            else this.R=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
 
         drawTruthT(sheet,x,y,w,h)
         {
@@ -354,6 +370,30 @@
             this.Q = this.nextQ;
 
           }
+
+
+        input1Changed(sheet)    // D input 
+        {
+            if(this.D==1)  this.D=0;    //  inverz  D
+            else this.D=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
+
+        input2Changed(sheet)    // G input 
+        {
+            if(this.G==1)  this.G=0;    //  inverz  G
+            else this.G=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
+
 
     }
 
@@ -656,7 +696,7 @@
             this.sheet.fillRect(this.x,this.y,this.width,this.height);    // button shape
             this.sheet.textBaseline = "middle";
             this. sheet.textAlign = "center";
-            this.sheet.font = "this.font";
+            this.sheet.font = this.font;
             this.sheet.fillStyle = this.textcolor;
             this.sheet.fillText(this.text,this.x+this.width/2,this.y+this.height/2);             // button text
     
