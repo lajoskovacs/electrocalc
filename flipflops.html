@@ -45,11 +45,8 @@
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
 
-            if((fftype == "DC") ||(fftype == "TC"))    
-                myFlipflop.drawHArrow(draw1,655,93+myFlipflop.status*24,610);
-            else 
-                myFlipflop.drawHArrow(draw1,695,93+myFlipflop.status*24,650);
-            myFlipflop.drawHArrow(draw1,695,93+myFlipflop.status*24,650);
+            drawMark(draw1,330,0,345,350);
+           
             
     }
         
@@ -113,7 +110,18 @@
 
     }     
 
- 
+   //*********************************************************************************
+    
+    function drawMark()
+    {
+
+
+
+
+
+    }
+
+
     //*********************************************************************************
 
 	class FlipflopSR{
@@ -238,35 +246,6 @@
         }
 
 
-        drawHArrow(sheet,x1,y1,x2)
-        // horizontal arrow
-        {
-            let du = 0;
-            let xu = 0;
-            sheet.lineWidth=5;
-	        sheet.strokeStyle="#00FF00";
-
-            xu = (x2-x1)/6;
-            du = xu.toFixed(0);
-            sheet.beginPath();
-            sheet.moveTo(x1,y1);
-            sheet.lineTo(x2,y1);    
-            sheet.closePath();	
-            sheet.stroke();
-            sheet.beginPath();
-		    sheet.moveTo(x2-2*du,y1-du);
-		    sheet.lineTo(x2,y1);
-            sheet.closePath();	
-            sheet.stroke();
-            sheet.beginPath();
-            sheet.moveTo(x2-2*du,y1+du);
-		    sheet.lineTo(x2,y1);             
-		    sheet.closePath();	
-            sheet.stroke();
-
-
-        }
-
 
         drawInpOutp(sheet)
         {
@@ -313,7 +292,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+         
         }
 
 
@@ -324,7 +303,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+          
         }
 
 
@@ -450,7 +429,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+          
         }
 
 
@@ -461,7 +440,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+         
         }
 
 
@@ -579,7 +558,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+           
         }
 
 
@@ -590,7 +569,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+           
         }
 
 
@@ -718,7 +697,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+            
         }
 
 
@@ -858,7 +837,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+           
         }
 
         input2Changed(sheet)    // K input 
@@ -868,7 +847,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+           
         }
 
 
@@ -879,7 +858,7 @@
 
             this.calc();
             this.drawInpOutp(sheet);
-        
+           
         }
 
 
