@@ -120,6 +120,7 @@
             this.Q = 0;     // output-Q, present state
             this.nextQ = 0;     // next state
             this.du = 1;
+            this.status = 0;   // flipflop inputs + state -> row of truthtable
 
             this.truthtable = [
             ["S","R","Qt","Qt+1"],
@@ -261,6 +262,7 @@
             if(newQ) this.nextQ = 1;
             else this.nextQ = 0;
             this.Q = this.nextQ;
+            this.status = 4*this.S + 2*this.R + this.Q;  // row of truthtable
 
           }
 
@@ -398,7 +400,7 @@
             if(newQ) this.nextQ = 1;
             else this.nextQ = 0;
             this.Q = this.nextQ;
-
+            this.status = 4*this.D + 2*this.G + this.Q;  // row of truthtable
           }
 
 
@@ -527,6 +529,7 @@
             else this.nextQ = 0;
             this.Q = this.nextQ;
             this.Cprev = this.C;
+            this.status = 2*this.D + this.Q;  // row of truthtable
           }
 
 
@@ -665,6 +668,7 @@
             else this.nextQ = 0;
             this.Q = this.nextQ;
             this.Cprev = this.C;
+            this.status = 2*this.T + this.Q;  // row of truthtable
           }
 
 
@@ -804,6 +808,7 @@
             this.nextQ = newQ;
             this.Q = this.nextQ;
             this.Cprev = this.C;
+            this.status = 4*this.J + 2*this.K + this.Q;  // row of truthtable
         }
 
 
