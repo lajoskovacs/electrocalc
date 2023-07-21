@@ -52,7 +52,7 @@
         
     function flipflopType()
      {
-        fftype=document.valaszt.tarolo.value;	// kiválasztott tároló típus
+        fftype = document.valaszt.tarolo.value;	// kiválasztott tároló típus
 
         if(fftype == "SR")
             myFlipflop = new FlipflopSR(draw1);
@@ -92,6 +92,13 @@
            
         }
 
+
+        if(fftype == "JK")
+        {
+            if(myFlipflop.input3.isclick(x,y))
+                myFlipflop.input3Changed(draw1);
+           
+        }
 
 
     }     
