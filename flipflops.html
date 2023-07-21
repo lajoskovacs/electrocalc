@@ -45,7 +45,7 @@
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
 
-            drawMark(draw1,330,0,345,350);
+            drawMark(draw1,370,0,30,350);
            
             
     }
@@ -67,13 +67,10 @@
         else if(fftype == "JK")
             myFlipflop = new FlipflopJK(draw1);
 
-            myFlipflop.draw(draw1,0,0,300,300);
-            myFlipflop.drawTruthT(draw1,350,0,350,350);
-        
-        if((fftype == "DC") ||(fftype == "TC"))    
-            myFlipflop.drawHArrow(draw1,655,93+myFlipflop.status*24,610);
-        else 
-            myFlipflop.drawHArrow(draw1,695,93+myFlipflop.status*24,650);
+        myFlipflop.draw(draw1,0,0,300,300);
+        myFlipflop.drawTruthT(draw1,350,0,350,350);
+        drawMark(draw1,370,0,30,350);
+       
     }  
         
     //*********************************************************************************
@@ -107,17 +104,34 @@
            
         }
 
-
+        drawMark(draw1,370,0,30,350);
     }     
 
    //*********************************************************************************
     
-    function drawMark()
+    function drawMark(sheet,x,y,w,h)
+    // mark truthtable row
     {
+        let r;
+        let x1;
+        let y1;
+        let r1;
+        
+        sheet.lineWidth = 10;
+	    sheet.strokeStyle = "#00FF00";	
+        sheet.fillStyle = "#00FF00";
+        sheet.clearRect(x,y,w,h);
 
-
-
-
+        r = w/5;
+        r1 = r.toFixed(0);
+        x1 = x+3*r1;
+        y1 = y+95+myFlipflop.status*28;
+        sheet.beginPath();
+        sheet.arc(x1,y1,r1,0,2*Math.PI);       
+        //sheet.arc(x1,95,r1,0,2*Math.PI); 
+        sheet.closePath();
+        sheet.stroke();
+        //sheet.fill();
 
     }
 
@@ -333,7 +347,7 @@
  	        sheet.font = "25px Arial";
  	
             // truthtable label
-            sheet.fillText("Igazság táblázat",10*du,10*du);
+            sheet.fillText("Igazság táblázat",18*du,10*du);
 
             // drawing table
 	          for(let i=1;i<5;i++)   
@@ -599,7 +613,7 @@
  	          sheet.font = "25px Arial";
  	
             // truthtable label
-            sheet.fillText("Igazság táblázat",10*du,10*du);
+            sheet.fillText("Igazság táblázat",18*du,10*du);
 
             // drawing table
 	          for(let i=1;i<4;i++)   
