@@ -44,7 +44,12 @@
             myFlipflop = new FlipflopSR(draw1);		// tároló létrehozása
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
-         
+
+            if((fftype == "DC") ||(fftype == "TC"))    
+                myFlipflop.drawHArrow(draw1,655,93+myFlipflop.status*24,610);
+            else 
+                myFlipflop.drawHArrow(draw1,695,93+myFlipflop.status*24,650);
+            myFlipflop.drawHArrow(draw1,695,93+myFlipflop.status*24,650);
             
     }
         
@@ -67,6 +72,11 @@
 
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
+        
+        if((fftype == "DC") ||(fftype == "TC"))    
+            myFlipflop.drawHArrow(draw1,655,93+myFlipflop.status*24,610);
+        else 
+            myFlipflop.drawHArrow(draw1,695,93+myFlipflop.status*24,650);
     }  
         
     //*********************************************************************************
@@ -218,7 +228,6 @@
         }
 
 
-
         drawLine(sheet,x1,y1,x2,y2)
 	      {
             sheet.beginPath();
@@ -233,16 +242,23 @@
         // horizontal arrow
         {
             let du = 0;
-            sheet.lineWidth=6;
+            let xu = 0;
+            sheet.lineWidth=5;
 	        sheet.strokeStyle="#00FF00";
 
-            du = (x2-x1)/6;
-            du = du.toFixed(0);
+            xu = (x2-x1)/6;
+            du = xu.toFixed(0);
             sheet.beginPath();
             sheet.moveTo(x1,y1);
-            sheet.lineTo(x2,y1);      
+            sheet.lineTo(x2,y1);    
+            sheet.closePath();	
+            sheet.stroke();
+            sheet.beginPath();
 		    sheet.moveTo(x2-2*du,y1-du);
-		    sheet.lineTo(x2,y1);      
+		    sheet.lineTo(x2,y1);
+            sheet.closePath();	
+            sheet.stroke();
+            sheet.beginPath();
             sheet.moveTo(x2-2*du,y1+du);
 		    sheet.lineTo(x2,y1);             
 		    sheet.closePath();	
@@ -332,10 +348,10 @@
 
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
-	          sheet.lineWidth = 3;
-	          sheet.strokeStyle = "#FF0000";	
+	        sheet.lineWidth = 3;
+	        sheet.strokeStyle = "#FF0000";	
             sheet.fillStyle = "#0000FF";
- 	          sheet.font = "25px Arial";
+ 	        sheet.font = "25px Arial";
  	
             // truthtable label
             sheet.fillText("Igazság táblázat",10*du,10*du);
