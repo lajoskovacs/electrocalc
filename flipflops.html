@@ -701,6 +701,8 @@
             ["1","1","0","1"],
             ["1","1","1","0"]];
             
+            this.input3 = new Button();
+
         }
 
 
@@ -748,12 +750,35 @@
         }
         
 
+        drawInpOutp(sheet)
+        {
+            var du;
+            du = this.du;     // drawing unit
+            let notQ;
+
+            this.input1.setText(this.J.toString());     // this change !!
+            this.input2.setText(this.K.toString());     // this change !!
+            this.input3.setText(this.C.toString());     // this change !!   
+            this.output1.setText(this.Q.toString());
+            if(this.Q)  notQ=0;
+            else notQ=1;
+            this.output2.setText(notQ.toString());
+
+            this.input1.draw(sheet,this.x+12*du,this.y+35*du,10*du,10*du);   // input J
+            this.input2.draw(sheet,this.x+12*du,this.y+65*du,10*du,10*du);   // input K
+            this.input3.draw(sheet,this.x+12*du,this.y+50*du,10*du,10*du);   // input clock, this change !!
+            this.output1.draw(sheet,this.x+88*du,this.y+35*du,10*du,10*du);   // output Q
+            this.output2.draw(sheet,this.x+88*du,this.y+65*du,10*du,10*du);   // output notQ
+   
+
+        }
+
        // calculation of next state of flipflop
        calc() 
         {
             let newQ;
             // JK flipflop, pozitív élvezérelt
-            if(this.Cnext == 1 && this.C == 0)  // positive clock edge
+            if(this.C == 1 && this.Cprev == 0)  // positive clock edge
             { 
                 if(this.J == 1 && this.K == 1)    // inverz
                 {  
@@ -771,15 +796,48 @@
 
             this.nextQ = newQ;
             this.Q = this.nextQ;
+            this.Cprev = this.C;
+        }
 
+
+        input1Changed(sheet)    // J input 
+        {
+            if(this.J==1)  this.J=0;    //  inverz  J
+            else this.J=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
+        input2Changed(sheet)    // K input 
+        {
+            if(this.K==1)  this.K=0;    //  inverz  K
+            else this.K=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
+
+        input3Changed(sheet)    // clock input 
+        {
+            if(this.C==1)  this.C=0;    //  inverz  clock
+            else this.C=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
         }
 
 
 
-
-
-
     }
+
+
+
+ //*********************************************************************************
 
 
     class Button {
