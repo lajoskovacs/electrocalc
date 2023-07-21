@@ -127,7 +127,7 @@
 
             this.input1 = new Button();
             this.input2 = new Button();
-            this.inpclock = new Button();
+          
             this.output1  = new Button();
             this.output2 = new Button();
 	    
@@ -433,7 +433,7 @@
             this.title = "D tároló  (D flipflop)";
             this.D = 0;     // input-D
             this.C = 0;     // input-clock
-            this.Cnext = 0;     // input-clock next
+            this.Cprev = 0;     // input-clock previous value
 
             this.truthtable = [
             ["D","Qt","Qt+1"],
@@ -442,21 +442,9 @@
             ["1","0","1"],
             ["1","1","1"]];
 
+
         }
 
-         // calculation of next state of flipflop
-        calc() 
-          {
-            let newQ;
-                // D flipflop, pozitív élvezérelt
-            if(this.Cnext == 1 && this.C == 0)  // positive clock edge
-               { newQ = this.D;  }
-            else  newQ = this.Q;  
-            if(newQ) this.nextQ = 1;
-            else this.nextQ = 0;
-            this.Q = this.nextQ;
-
-          }
 
         draw(sheet,x,y,w,h){
 	          // D  tároló rajzolása   
@@ -495,6 +483,67 @@
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
             this.drawInpOutp(sheet); // input and output buttons draw
         }
+
+
+        drawInpOutp(sheet)
+        {
+            var du;
+            du = this.du;     // drawing unit
+            let notQ;
+
+            this.input1.setText(this.D.toString());
+            this.input2.setText(this.C.toString());
+            this.output1.setText(this.Q.toString());
+            if(this.Q)  notQ=0;
+            else notQ=1;
+            this.output2.setText(notQ.toString());
+
+            this.input1.draw(sheet,this.x+12*du,this.y+35*du,10*du,10*du);   // input D
+            this.input2.draw(sheet,this.x+12*du,this.y+65*du,10*du,10*du);   // input clock
+            
+            this.output1.draw(sheet,this.x+88*du,this.y+35*du,10*du,10*du);   // output Q
+            this.output2.draw(sheet,this.x+88*du,this.y+65*du,10*du,10*du);   // output notQ
+   
+
+        }
+
+
+        // calculation of next state of flipflop
+        calc() 
+          {
+            let newQ;
+                // D flipflop, pozitív élvezérelt
+            if(this.C == 1 && this.Cprev == 0)  // positive clock edge
+               { newQ = this.D;  }
+            else  newQ = this.Q;  
+            if(newQ) this.nextQ = 1;
+            else this.nextQ = 0;
+            this.Q = this.nextQ;
+            this.Cprev = this.C;
+          }
+
+
+        input1Changed(sheet)    // D input 
+        {
+            if(this.D==1)  this.D=0;    //  inverz  D
+            else this.D=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
+
+        input2Changed(sheet)    // clock input 
+        {
+            if(this.C==1)  this.C=0;    //  inverz  clock
+            else this.C=1;
+
+            this.calc();
+            this.drawInpOutp(sheet);
+        
+        }
+
 
         drawTruthT(sheet,x,y,w,h)
         {
@@ -602,7 +651,7 @@
             this.J = 0;     // input-J
             this.K = 0;     // input-K
             this.C = 0;     // input-clock
-            this.Cnext = 0;     // input-clock next
+            this.Cprev = 0;     // input-clock previous
 
             this.truthtable = [
             ["J","K","Qt","Qt+1"],
@@ -615,33 +664,6 @@
             ["1","1","0","1"],
             ["1","1","1","0"]];
             
-        }
-
-
-         // calculation of next state of flipflop
-        calc() 
-        {
-            let newQ;
-            // JK flipflop, pozitív élvezérelt
-            if(this.Cnext == 1 && this.C == 0)  // positive clock edge
-            { 
-                if(this.J == 1 && this.K == 1)    // inverz
-                {  
-                    if(this.Q) newQ = 0;
-                    else newQ = 1;
-                }
-                else if(this.J == 1 && this.K == 0)   // set
-                  { newQ = 1;  }  
-                else if(this.J == 0 && this.K == 1)  // reset
-                  { newQ = 0;  }   
-                else
-                  { newQ = this.Q;  }     // store
-            }
-            else   newQ = this.Q;  
-
-            this.nextQ = newQ;
-            this.Q = this.nextQ;
-
         }
 
 
@@ -687,6 +709,38 @@
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
             this.drawInpOutp(sheet); // input and output buttons draw
         }
+        
+
+       // calculation of next state of flipflop
+       calc() 
+        {
+            let newQ;
+            // JK flipflop, pozitív élvezérelt
+            if(this.Cnext == 1 && this.C == 0)  // positive clock edge
+            { 
+                if(this.J == 1 && this.K == 1)    // inverz
+                {  
+                    if(this.Q) newQ = 0;
+                    else newQ = 1;
+                }
+                else if(this.J == 1 && this.K == 0)   // set
+                  { newQ = 1;  }  
+                else if(this.J == 0 && this.K == 1)  // reset
+                  { newQ = 0;  }   
+                else
+                  { newQ = this.Q;  }     // store
+            }
+            else   newQ = this.Q;  
+
+            this.nextQ = newQ;
+            this.Q = this.nextQ;
+
+        }
+
+
+
+
+
 
     }
 
