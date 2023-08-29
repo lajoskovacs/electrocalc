@@ -30,7 +30,7 @@
     var fftype="SR";
       
     var myFlipflop;
-
+    var myTimechart;
         
         
     //*********************************************************************************
@@ -44,9 +44,10 @@
             myFlipflop = new FlipflopSR(draw1);		// tároló létrehozása
             myFlipflop.draw(draw1,0,0,300,300);
             myFlipflop.drawTruthT(draw1,350,0,350,350);
-
             drawMark(draw1,370,0,30,350);
            
+            myTimechart = new Timechart(draw1);		// idődiagram létrehozása
+            myTimechart.draw(draw1,0,360,700,600);
             
     }
         
@@ -966,6 +967,66 @@
 
     }
 
+
+ //*********************************************************************************
+
+
+ class Timechart{
+        // idődiagram kirajzolása 
+
+        constructor(sheet){    
+		    this.du = 0;
+		    this.x = 0;
+		    this.y = 0;
+		    this.width = 0;
+		    this.height = 0; 
+        }
+    
+
+        draw(sheet,x,y,w,h)
+          // idődiagram rajzolása
+	       //  x,y  kezdő koordináták (bal-felső sarok)
+	       // w - szélesség,  h - magasság
+	      {
+            var xu; 
+            var yu;
+            var du;
+        
+            xu = w/100;
+            yu = h/100;
+            if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
+            else this.du = yu;
+		    this.x = x;
+		    this.y = y;
+		    this.width = w;
+		    this.height = h;  
+			  
+            du=this.du;     // drawing unit
+	
+            // canvas  x,y coordinates translate
+            sheet.translate(this.x, this.y);
+            sheet.clearRect(0,0,this.width,this.height);
+
+            
+	          //  label
+            sheet.textBaseline = "bottom";
+            sheet.textAlign = "left";
+	        sheet.lineWidth=3;
+	        sheet.strokeStyle="#FF0000";	
+            sheet.fillStyle="#FF0000";
+ 	        sheet.font="25px Arial";
+            sheet.fillText("Idő diagram",20*du,5*du);
+
+
+
+
+            sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
+            
+        }
+        
+
+
+    }
 
 
 </script>
