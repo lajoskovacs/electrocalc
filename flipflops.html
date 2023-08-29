@@ -470,7 +470,16 @@
          
         }
 
+        getInpOutp()     
+        {
+            var io = [["D","G","Q"],[0,0,0]];
 
+            io[1][0] = this.D;
+            io[1][1] = this.G;
+            io[1][2] = this.Q;
+
+            return io;
+        }
 
     }
 
