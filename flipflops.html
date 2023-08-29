@@ -974,32 +974,32 @@
  class Timechart{
         // idődiagram kirajzolása 
 
-        constructor(sheet){    
-		    this.du = 0;
-		    this.x = 0;
-		    this.y = 0;
-		    this.width = 0;
-		    this.height = 0; 
-        }
-    
-
-        draw(sheet,x,y,w,h)
-          // idődiagram rajzolása
-	       //  x,y  kezdő koordináták (bal-felső sarok)
-	       // w - szélesség,  h - magasság
-	      {
+        constructor(sheet,x,y,w,h){ 
+            //  x,y  kezdő koordináták (bal-felső sarok)
+	        // w - szélesség,  h - magasság
             var xu; 
             var yu;
-            var du;
-        
+
+            this.x = x;
+		    this.y = y;
+		    this.width = w;
+		    this.height = h;
             xu = w/100;
             yu = h/100;
             if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
             else this.du = yu;
-		    this.x = x;
-		    this.y = y;
-		    this.width = w;
-		    this.height = h;  
+            
+        }
+    
+
+        draw(sheet)
+          // idődiagram rajzolása
+	     
+	      {
+            
+            var du;
+        
+    
 			  
             du=this.du;     // drawing unit
 	
