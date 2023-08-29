@@ -323,11 +323,11 @@
 
         getInpOutp()     
         {
-            var io = {'S':0, 'R':0, 'Q':0};
+            var io = [["S","R","Q"],[0,0,0]];
 
-            io['S'] = this.S;
-            io['R'] = this.R;
-            io['Q'] = this.Q;
+            io[1][0] = this.S;
+            io[1][1] = this.R;
+            io[1][2] = this.Q;
 
             return io;
         }
