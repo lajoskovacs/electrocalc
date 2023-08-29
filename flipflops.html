@@ -321,6 +321,18 @@
           
         }
 
+        getInpOutp()     
+        {
+            var io = {'S':0, 'R':0, 'Q':0};
+
+            io['S'] = this.S;
+            io['R'] = this.R;
+            io['Q'] = this.Q;
+
+            return io;
+        }
+
+
 
         drawTruthT(sheet,x,y,w,h)
         {
