@@ -1053,7 +1053,7 @@
 	      {
             
             var du;
-        
+            var bits = [0,1,1,1,0,0,0,1,1,0,1,1,1,0,0,1,0,0,0,1];
     
 			  
             du=this.du;     // drawing unit
@@ -1072,13 +1072,46 @@
  	        sheet.font="25px Arial";
             sheet.fillText("Idő diagram",20*du,5*du);
 
-
+            this.plotbitseq(sheet,15*du,8*du,3*du,3*du,bits)
 
 
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
             
         }
         
+
+        plotbitseq(sheet,x,y,dx,dy,seq)
+        //  plotting a binary sequence
+        //  seq -  sequence of bits
+        {
+            let i = 0;
+            let bits = 0;
+
+            bits = seq.length;
+            // sheet.beginPath();
+		    if(seq[0]==1) sheet.moveTo(x,y);
+            if(seq[0]==0) sheet.moveTo(x,y+dy);
+            for(i=0;i<bits;i++)
+            {
+                if(i>0)
+                {
+                    if(seq[i-1]==0 && seq[i]==1) sheet.lineTo(x,y);
+                    if(seq[i-1]==1 && seq[i]==0) sheet.lineTo(x,y+dy);
+                }
+                if(seq[i]==1) sheet.lineTo(x+dx,y);     // 1 -> top line
+                if(seq[i]==0) sheet.lineTo(x+dx,y+dy);  // 0 -> bottom line
+                x=x+dx;
+            }
+		       
+
+		     //   sheet.closePath();	
+            sheet.stroke();
+
+
+        }
+
+
+
 
 
     }
