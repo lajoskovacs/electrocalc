@@ -614,7 +614,7 @@
 
         getInpOutp()     
         {
-            var io = [["C (clock)","D","Q"],[0,0,0]];
+            var io = [["C,clock","D","Q"],[0,0,0]];
 
             io[1][0] = this.C;
             io[1][1] = this.D;
@@ -754,7 +754,7 @@
 
         getInpOutp()     
         {
-            var io = [["C (clock)","T","Q"],[0,0,0]];
+            var io = [["C,clock","T","Q"],[0,0,0]];
 
             io[1][0] = this.C;
             io[1][1] = this.T;
@@ -925,7 +925,7 @@
 
         getInpOutp()     
         {
-            var io = [["C (clock)","J","K","Q"],[0,0,0,0]];
+            var io = [["C,clock","J","K","Q"],[0,0,0,0]];
 
             io[1][0] = this.C;
             io[1][1] = this.J;
@@ -1033,7 +1033,8 @@
         // idődiagram kirajzolása
         // tipikus terület  700x350 
 
-        constructor(sheet,x,y,w,h){ 
+        constructor(sheet,x,y,w,h)
+        { 
             //  x,y  kezdő koordináták (bal-felső sarok)
 	        // w - szélesség,  h - magasság
             var xu; 
@@ -1087,10 +1088,19 @@
  	        sheet.font="25px Arial";
             sheet.fillText("Idő diagram",5*du,3*du);
 
-            sheet.font="16px Arial";
-            sheet.fillText(bits_new[0][0],4*du,8*du);            // 1. Input label
-            this.plotbitseq(sheet,8*du,6*du,4*du,4*du,this.bits_old[0])  // 1. input values
+            sheet.font="22px Arial";
+            sheet.fillText(bits_new[0][0],2*du,10*du);                      // 1. Input label
+            this.plotbitseq(sheet,10*du,6*du,4*du,4*du,this.bits_old[0])  // 1. input values
+            sheet.fillText(bits_new[0][1],2*du,18*du);                      // 2. Input label
+            this.plotbitseq(sheet,10*du,14*du,4*du,4*du,this.bits_old[1])  // 2. input values
+            sheet.fillText(bits_new[0][2],2*du,26*du);                      // 3. Input or output label
+            this.plotbitseq(sheet,10*du,22*du,4*du,4*du,this.bits_old[2])  // 3. input or output values
+            if(bits_new[1].length==4)
+            {
+                sheet.fillText(bits_new[0][3],2*du,34*du);                      // output label
+                this.plotbitseq(sheet,10*du,30*du,4*du,4*du,this.bits_old[3])  //  output values
 
+            }
 
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
             
