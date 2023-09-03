@@ -15,7 +15,8 @@
                 <option value="DG">DG Latch</option>
                 <option value="JK">JK flip-flop</option>
                 <option value="TC">T flip-flop</option>
-                <option value="DC">D flip-flop</option>		
+                <option value="DC">D flip-flop</option>	
+                <option value="JKn">JK flip-flop, negatív</option>	
         </select>
         <p> </p>
         <br>		
@@ -67,6 +68,8 @@
             myFlipflop = new FlipflopT(draw1); 
         else if(fftype == "JK")
             myFlipflop = new FlipflopJK(draw1);
+        else if(fftype == "JKn")
+            myFlipflop = new FlipflopJKneg(draw1);
 
         myFlipflop.draw(draw1,0,0,300,300);
         myFlipflop.drawTruthT(draw1,350,0,350,350);
@@ -227,8 +230,8 @@
             // style
             sheet.textBaseline = "bottom";
             sheet.textAlign = "left";
-	         ; sheet.lineWidth=3;
-	          sheet.strokeStyle="#FF0000"	
+	         sheet.lineWidth=3;
+	          sheet.strokeStyle="#FF0000";	
             sheet.fillStyle="#FF0000";
  	          sheet.font="25px Arial";
  	
@@ -837,7 +840,7 @@
             sheet.fillText("C",47*du,59*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
             sheet.fillText("pozitív él-vezérelt !",40*du,95*du);
-            
+
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
             this.drawInpOutp(sheet); // input and output buttons draw
         }
@@ -941,7 +944,94 @@
 
     }
 
+//*********************************************************************************
 
+class FlipflopJKneg extends FlipflopJK {
+      // negatív él-vezérelt JK tároló rajzolása, számolása, igazságtáblázata
+
+        constructor(sheet) {
+            super(sheet);
+            this.type = "JKn";
+            this.title = "JK tároló  (JK flipflop)";
+           
+
+        }
+
+
+        draw(sheet,x,y,w,h)
+          // JK tároló rajzolása
+          //  negative edge controll JK flipflop
+	       //  x,y  kezdő koordináták (bal-felső sarok)
+	       // w - szélesség,  h - magasság
+	      {
+            var xu; 
+            var yu;
+            var du;
+        
+            xu = w/100;
+            yu = h/100;
+            if(xu<yu) this.du = xu;       // du -->  drawn unit  !!
+            else this.du = yu;
+		        this.x = x;
+		        this.y = y;
+		        this.width = w;
+		        this.height = h;  
+			  
+            du=this.du;     // drawing unit
+	
+            // canvas  x,y coordinates translate
+            sheet.translate(this.x, this.y);
+            sheet.clearRect(0,0,this.width,this.height);
+
+            this.drawFlipflop(sheet); // basic flipflop image
+
+            // third input (clock)
+            this.drawLine(sheet,25*du,55*du,40*du,55*du);   //  input_3
+            this.drawLine(sheet,40*du,53*du,45*du,55*du);   //  edge clock drawing mark
+            this.drawLine(sheet,40*du,57*du,45*du,55*du);   // edge clock drawing mark
+	        
+	          // input, output label
+	          sheet.fillStyle = "#221999";
+            sheet.fillText(this.type[0],42*du,44*du);
+ 	          sheet.fillText(this.type[1],42*du,74*du);     
+            sheet.fillText("C",47*du,59*du);       // letter right shift  !!
+            sheet.fillText("Q",60*du,44*du);
+            sheet.fillText("negatív él-vezérelt !",40*du,95*du);
+
+            sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
+            this.drawInpOutp(sheet); // input and output buttons draw
+        }
+        
+
+       // calculation of next state of flipflop
+       calc() 
+        {
+            let newQ;
+            // JK flipflop, negatív élvezérelt
+            if(this.C == 0 && this.Cprev == 1)  // negative clock edge
+            { 
+                if(this.J == 1 && this.K == 1)    // inverz
+                {  
+                    if(this.Q) newQ = 0;
+                    else newQ = 1;
+                }
+                else if(this.J == 1 && this.K == 0)   // set
+                  { newQ = 1;  }  
+                else if(this.J == 0 && this.K == 1)  // reset
+                  { newQ = 0;  }   
+                else
+                  { newQ = this.Q;  }     // store
+            }
+            else   newQ = this.Q;  
+
+            this.nextQ = newQ;
+            this.Q = this.nextQ;
+            this.Cprev = this.C;
+            this.status = 4*this.J + 2*this.K + this.Q;  // row of truthtable
+        }
+
+
+    }
 
  //*********************************************************************************
 
