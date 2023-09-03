@@ -103,7 +103,7 @@
         }
 
 
-        if(fftype == "JK")
+        if(fftype == "JK" || fftype == "JKn")
         {
             if(myFlipflop.input3.isclick(x,y))
                 myFlipflop.input3Changed(draw1);
@@ -548,7 +548,7 @@
             sheet.fillText(this.type[0],42*du,44*du);
  	          sheet.fillText(this.type[1],47*du,74*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
-            sheet.fillText("pozitív él-vezérelt !",40*du,95*du);
+            sheet.fillText("pozitív él-vezérelt !  ",30*du,95*du);
 
 
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
@@ -839,7 +839,7 @@
  	          sheet.fillText(this.type[1],42*du,74*du);     
             sheet.fillText("C",47*du,59*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
-            sheet.fillText("pozitív él-vezérelt !",40*du,95*du);
+            sheet.fillText("pozitív él-vezérelt !  ",30*du,95*du);
 
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
             this.drawInpOutp(sheet); // input and output buttons draw
@@ -996,7 +996,7 @@ class FlipflopJKneg extends FlipflopJK {
  	          sheet.fillText(this.type[1],42*du,74*du);     
             sheet.fillText("C",47*du,59*du);       // letter right shift  !!
             sheet.fillText("Q",60*du,44*du);
-            sheet.fillText("negatív él-vezérelt !",40*du,95*du);
+            sheet.fillText("negatív él-vezérelt !  ",30*du,95*du);
 
             sheet.translate(-this.x, -this.y);  // canvas  x,y coordinates
             this.drawInpOutp(sheet); // input and output buttons draw
