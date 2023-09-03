@@ -986,10 +986,17 @@ class FlipflopJKneg extends FlipflopJK {
             this.drawFlipflop(sheet); // basic flipflop image
 
             // third input (clock)
-            this.drawLine(sheet,25*du,55*du,40*du,55*du);   //  input_3
+          
             this.drawLine(sheet,40*du,53*du,45*du,55*du);   //  edge clock drawing mark
             this.drawLine(sheet,40*du,57*du,45*du,55*du);   // edge clock drawing mark
 	        
+            this.drawLine(sheet,25*du,55*du,34*du,55*du);   //  input_3
+            sheet.beginPath();
+            sheet.arc(37*du,55*du,3*du,0,2*Math.PI);        // negation circle
+            sheet.closePath();
+            sheet.stroke();
+
+
 	          // input, output label
 	          sheet.fillStyle = "#221999";
             sheet.fillText(this.type[0],42*du,44*du);
