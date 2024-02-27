@@ -23,7 +23,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.boxlayout import BoxLayout
-#from kivy.uix.gridlayout import GridLayout
+from kivy.uix.gridlayout import GridLayout
 #from kivy.properties import ObjectProperty
 #from kivy.graphics import Color, Ellipse, Line, Rectangle, Point, GraphicException
 
@@ -37,10 +37,43 @@ Builder.load_string('''
     TabbedPanelItem:
         text: 'XL'
         BoxLayout:
-            
+            orientation: 'vertical'       
+            GridLayout:
+                column: 2
+                size_hint: 1, 1/2
+                TextInput:				
+                    text: 'Induktív reaktancia'	
+		            font_size: 20
+                    foreground_color:1,0,0,1
+                    background_color:1,1,0,1
+                    multiline: False
+                    readonly: True
+                TextInput:				
+                    text: '??'
+
+                Button:
+                    text: 'L'
+                TextInput:				
+                    text: 'ha'		
+		            font_size: 12
+
+            BoxLayout:
+                orientation: 'vertical'  
+                size_hint: 1, 1/2        
+
+
     TabbedPanelItem:
         text: 'XC'
         BoxLayout:           
+
+
+
+    TabbedPanelItem:
+        text: 'fo'
+        BoxLayout:   
+
+
+
 
 ''')
 
