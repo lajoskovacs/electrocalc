@@ -39,23 +39,38 @@ Builder.load_string('''
         BoxLayout:
             orientation: 'vertical'       
             GridLayout:
-                column: 2
+                cols: 2
+                padding: '10dp'
+                spacing: '20dp'
                 size_hint: 1, 1/2
                 TextInput:				
                     text: 'Induktív reaktancia'	
-		            font_size: 20
+                    size_hint: 1, 1/2
+		            font_size: '20sp'
                     foreground_color:1,0,0,1
                     background_color:1,1,0,1
                     multiline: False
                     readonly: True
                 TextInput:				
                     text: '??'
+                    size_hint: 1, 1/2
 
                 Button:
                     text: 'L'
                 TextInput:				
                     text: 'ha'		
-		            font_size: 12
+		            font_size: '20sp'
+                Button:
+                    text: 'f'
+                TextInput:				
+                    text: 'ha'		
+		            font_size: '20sp'
+                Button:
+                    text: 'XL'
+                TextInput:				
+                    text: 'ha'		
+		            font_size: '20sp'
+
 
             BoxLayout:
                 orientation: 'vertical'  
