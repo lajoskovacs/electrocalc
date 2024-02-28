@@ -441,9 +441,9 @@ class EcalcWidget(TabbedPanel):
     def __init__(self):
         super().__init__()
 
+
+  
       
-
-
 class EcalcApp(App):
 
     def build(self):       
