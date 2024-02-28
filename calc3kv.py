@@ -97,6 +97,33 @@ Builder.load_string('''
     TabbedPanelItem:
         text: 'R'
         BoxLayout:   
+            orientation: 'vertical'   
+            size_hint: 1, 1/2
+            PageLabel:				
+                text: 'Vezeték ellenállása'	
+                size_hint: 1, 1/7
+
+
+    TabbedPanelItem:
+        text: 'RC'
+        BoxLayout:   
+            orientation: 'vertical'   
+            size_hint: 1, 1/2
+            PageLabel:				
+                text: 'RC szűrő (aluláteresztő)'	
+                size_hint: 1, 1/7
+            RLC_GridL:
+                size_hint: 1, 6/7
+
+
+    TabbedPanelItem:
+        text: 'CR'
+        BoxLayout:   
+            orientation: 'vertical'   
+            size_hint: 1, 1/2
+            PageLabel:				
+                text: 'CR szűrő (felüláteresztő)'	
+                size_hint: 1, 1/7
 
 
 
@@ -176,7 +203,7 @@ Builder.load_string('''
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
-        text: 'Rezonancia frekv. fo (Hz)'
+        text: 'Rezonancia fr. fo (Hz)'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
         text: 'ha'		
@@ -187,7 +214,7 @@ Builder.load_string('''
 <RLC_GridL>:
     cols: 2
     padding: '10dp'
-    spacing: '20dp'
+    spacing: '10dp'
 
     Button:
         text: 'Frekvencia, f (Hz)'
@@ -227,7 +254,59 @@ Builder.load_string('''
         foreground_color:1,0,0,1
 
     Button:
-        text: 'Fázisszög,fi (fok)'
+        text: 'Fázisszög, fi (fok)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+
+
+
+<RC_GridL>:
+    cols: 2
+    padding: '10dp'
+    spacing: '10dp'
+
+    Button:
+        text: 'Frekvencia, f (Hz)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1    
+    Button:
+        text: 'Ellenállás, R (ohm)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+    Button:
+        text: 'Kapacitás, C (nF)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+    Button:
+        text: 'Feszültség átvitel, Uki / Ube'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+
+    Button:
+        text: 'Fázistolás, ki-be (fok)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+
+    Button:
+        text: 'Határfrekvencia, fh (Hz)'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
         text: 'ha'		
@@ -258,7 +337,11 @@ class RLC_GridL(GridLayout):
 class R_GridL(GridLayout):
     pass
 
+class RC_GridL(GridLayout):
+    pass
 
+class CR_GridL(GridLayout):
+    pass
 
 class EcalcWidget(TabbedPanel):
 
