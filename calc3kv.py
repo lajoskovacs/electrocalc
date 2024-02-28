@@ -98,10 +98,14 @@ Builder.load_string('''
         text: 'R'
         BoxLayout:   
             orientation: 'vertical'   
-            size_hint: 1, 1/2
+            size_hint: 1, 2/5
             PageLabel:				
                 text: 'Vezeték ellenállása'	
-                size_hint: 1, 1/7
+                size_hint: 1, 1/5
+            R_GridL:
+                size_hint: 1, 4/5          
+
+
 
 
     TabbedPanelItem:
@@ -365,6 +369,43 @@ Builder.load_string('''
         text: 'ha'		
 		font_size: '16sp'
         foreground_color:1,0,0,1
+
+
+<R_GridL>:
+    cols: 2
+    padding: '10dp'
+    spacing: '20dp'
+
+    Button:
+        text: 'Hossz, l (m)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1    
+    Button:
+        text: 'Átmérő, d (mm)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+    Button:
+        text: 'Anyag'
+        color: 0.5, 0.6, 0.7, 1
+    Spinner: 
+        text: "Réz"
+		font_size: '16sp'
+        foreground_color:1,0,0,1	        
+        values:'Réz','Alumínium','Arany','Ezüst'
+    Button:
+        text: 'Ellenállás, R (ohm)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+
 
 ''')
 
