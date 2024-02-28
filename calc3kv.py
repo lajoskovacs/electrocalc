@@ -144,17 +144,19 @@ Builder.load_string('''
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 0.5, 0.6, 0.7, 1
+        on_press: root.f_button_click()
     TextInput:	
         id: f_text			
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Induktivitás, L (mH)'
         color: 0.5, 0.6, 0.7, 1
+        on_press: root.l_button_click()
     TextInput:			
         id: L_text	
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
@@ -163,7 +165,7 @@ Builder.load_string('''
         on_press: root.xl_button_click()
     TextInput:		
         id: xl_text		
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
 
@@ -454,6 +456,58 @@ class XL_GridL(GridLayout):
             self.xl_textin.text = "hiba!!"  
 
 
+    def l_button_click(self):
+        #  L calculation
+        
+        ok = True
+        try:
+            xl = float(self.xl_textin.text)   # read value of 'XL' from textinput
+            if xl <= 0:                   # bad value !
+                ok = False
+                self.xl_textin.text = self.xl_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.xl_textin.text = self.xl_textin.text + ' ?'  
+        try:
+            f = float(self.f_textin.text)   # read  value of 'f' from textinput
+            if f <= 0:                  # bad value !
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'  
+        if ok:
+            L = 1000*xl/(2*pi*f)         #  L  in mH !!
+            self.l_textin.text = str(L)   # write  'L' 
+        else:
+            self.l_textin.text = "hiba!!"  
+
+
+    def f_button_click(self):
+        #  f calculation
+        
+        ok = True
+        try:
+            L = float(self.l_textin.text)   # read value of 'L' from textinput
+            if L <= 0:                   # bad value !
+                ok = False
+                self.l_textin.text = self.l_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.l_textin.text = self.l_textin.text + ' ?'  
+        try:
+            f = float(self.f_textin.text)   # read  value of 'f' from textinput
+            if f <= 0:                  # bad value !
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'  
+        if ok:
+            xl = 2*pi*f*L/1000         #  XL  in Ohm !!
+            self.xl_textin.text = str(xl)   # write  'XL' 
+        else:
+            self.xl_textin.text = "hiba!!"  
 
 
 
