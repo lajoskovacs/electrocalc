@@ -112,7 +112,7 @@ Builder.load_string('''
             PageLabel:				
                 text: 'RC szűrő (aluláteresztő)'	
                 size_hint: 1, 1/7
-            RLC_GridL:
+            RC_GridL:
                 size_hint: 1, 6/7
 
 
@@ -124,6 +124,8 @@ Builder.load_string('''
             PageLabel:				
                 text: 'CR szűrő (felüláteresztő)'	
                 size_hint: 1, 1/7
+            CR_GridL:
+                size_hint: 1, 6/7
 
 
 
@@ -290,7 +292,7 @@ Builder.load_string('''
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
-        text: 'Feszültség átvitel, Uki / Ube'
+        text: 'Feszültség átv., Uki/Ube'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
         text: 'ha'		
@@ -313,6 +315,56 @@ Builder.load_string('''
 		font_size: '16sp'
         foreground_color:1,0,0,1
 
+
+<CR_GridL>:
+    cols: 2
+    padding: '10dp'
+    spacing: '10dp'
+
+    Button:
+        text: 'Frekvencia, f (Hz)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1    
+    Button:
+        text: 'Ellenállás, R (ohm)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+    Button:
+        text: 'Kapacitás, C (nF)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+    Button:
+        text: 'Feszültség átv., Uki/Ube'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+
+    Button:
+        text: 'Fázistolás, ki-be (fok)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+
+    Button:
+        text: 'Határfrekvencia, fh (Hz)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
 
 ''')
 
