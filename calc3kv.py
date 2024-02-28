@@ -134,28 +134,35 @@ Builder.load_string('''
 
 
 <XL_GridL>:
+    xl_textin: xl_text
+    l_textin: L_text
+    f_textin: f_text
     cols: 2
     padding: '10dp'
     spacing: '20dp'
-        
+       
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+    TextInput:	
+        id: f_text			
         text: 'ha'		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Induktivitás, L (mH)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+    TextInput:			
+        id: L_text	
         text: 'ha'		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'XL (ohm)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+        on_press: root.xl_button_click()
+    TextInput:		
+        id: xl_text		
         text: 'ha'		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -415,7 +422,16 @@ class PageLabel(TextInput):
 
 
 class XL_GridL(GridLayout):
-    pass
+
+    def xl_button_click(self):
+        self.xl_textin.text = 'klik'
+        return
+
+
+
+
+
+
 
 
 class XC_GridL(GridLayout):
