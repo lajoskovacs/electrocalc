@@ -496,18 +496,18 @@ class XL_GridL(GridLayout):
             ok = False
             self.l_textin.text = self.l_textin.text + ' ?'  
         try:
-            f = float(self.f_textin.text)   # read  value of 'f' from textinput
-            if f <= 0:                  # bad value !
+            xl = float(self.xl_textin.text)   # read  value of 'XL' from textinput
+            if xl <= 0:                  # bad value !
                 ok = False
-                self.f_textin.text = self.f_textin.text + ' ?'                  
+                self.xl_textin.text = self.xl_textin.text + ' ?'                  
         except:                              # bad value !
             ok = False
-            self.f_textin.text = self.f_textin.text + ' ?'  
+            self.xl_textin.text = self.xl_textin.text + ' ?'  
         if ok:
-            xl = 2*pi*f*L/1000         #  XL  in Ohm !!
-            self.xl_textin.text = str(xl)   # write  'XL' 
+            f = 1000*xl/(2*pi*L)      #  f  in Hz !!
+            self.f_textin.text = str(f)   # write  'f' 
         else:
-            self.xl_textin.text = "hiba!!"  
+            self.f_textin.text = "hiba!!"  
 
 
 
