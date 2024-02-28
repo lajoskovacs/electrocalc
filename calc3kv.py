@@ -71,7 +71,14 @@ Builder.load_string('''
     TabbedPanelItem:
         text: 'fo'
         BoxLayout:   
+            orientation: 'vertical'   
+            size_hint: 1, 1/3
+            PageLabel:				
+                text: 'Rezonancia frekvencia'	
+                size_hint: 1, 1/8
 
+            Fo_GridL:
+                size_hint: 1, 7/8
 
     TabbedPanelItem:
         text: 'RLC'
@@ -111,6 +118,7 @@ Builder.load_string('''
 		font_size: '16sp'
         foreground_color:1,0,0,1
 
+
 <XC_GridL>:
     cols: 2
     padding: '10dp'
@@ -132,6 +140,34 @@ Builder.load_string('''
         foreground_color:1,0,0,1
     Button:
         text: 'XC (ohm)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+
+
+<Fo_GridL>:
+    cols: 2
+    padding: '10dp'
+    spacing: '20dp'
+        
+    Button:
+        text: 'Induktivitás, L (mH)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+    Button:
+        text: 'Kapacitás, C (nF)'
+        color: 0.5, 0.6, 0.7, 1
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+        foreground_color:1,0,0,1
+    Button:
+        text: 'Rezonancia frekvencia, fo (Hz)'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
         text: 'ha'		
