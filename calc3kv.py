@@ -181,7 +181,7 @@ Builder.load_string('''
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 0.5, 0.6, 0.7, 1
-        root.f_button_click()
+        on_press: root.f_button_click()
     TextInput:	
         id: f_text			
         text: ''		
@@ -190,7 +190,7 @@ Builder.load_string('''
     Button:
         text: 'Kapacitás, C (nF)'
         color: 0.5, 0.6, 0.7, 1
-        root.c_button_click()
+        on_press: root.c_button_click()
     TextInput:	
         id: C_text			
         text: ''		
@@ -199,7 +199,7 @@ Builder.load_string('''
     Button:
         text: 'XC (ohm)'
         color: 0.5, 0.6, 0.7, 1
-        root.xc_button_click()
+        on_press: root.xc_button_click()
     TextInput:	
         id: xc_text			
         text: ''		
@@ -575,7 +575,7 @@ class XC_GridL(GridLayout):
             self.f_textin.text = self.f_textin.text + ' ?'  
         if ok:
             C = 1000000000/(2*pi*f*xc)         #  C  in nF !!
-            self.c_textin.text = str(C)   # write  'L' 
+            self.c_textin.text = str(C)   # write  'C' 
         else:
             self.c_textin.text = "hiba!!"  
 
