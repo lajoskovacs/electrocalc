@@ -43,7 +43,7 @@ Builder.load_string('''
     do_default_tab: False
 
     TabbedPanelItem:
-        text: 'XL'
+        text: 'XL'L
         BoxLayout:
             orientation: 'vertical'   
             size_hint: 1, 1/3
@@ -171,6 +171,9 @@ Builder.load_string('''
 
 
 <XC_GridL>:
+    xc_textin: xc_text
+    c_textin: C_text
+    f_textin: f_text
     cols: 2
     padding: '10dp'
     spacing: '20dp'
@@ -178,22 +181,28 @@ Builder.load_string('''
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        root.f_button_click()
+    TextInput:	
+        id: f_text			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        root.c_button_click()
+    TextInput:	
+        id: C_text			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'XC (ohm)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        root.xc_button_click()
+    TextInput:	
+        id: xc_text			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
 
@@ -516,7 +525,91 @@ class XL_GridL(GridLayout):
 
 
 class XC_GridL(GridLayout):
-    pass
+
+    def xc_button_click(self):
+        #  XC calculation
+        
+        ok = True
+        try:
+            C = float(self.c_textin.text)   # read value of 'C' from textinput
+            if C <= 0:                   # bad value !
+                ok = False
+                self.c_textin.text = self.c_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.c_textin.text = self.c_textin.text + ' ?'  
+        try:
+            f = float(self.f_textin.text)   # read  value of 'f' from textinput
+            if f <= 0:                  # bad value !
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'  
+        if ok:
+            xc = 1000000000/(2*pi*f*C)        #  XC  in Ohm !!
+            self.xc_textin.text = str(xc)   # write  'XC' 
+        else:
+            self.xc_textin.text = "hiba!!"  
+
+
+    def c_button_click(self):
+        #  C calculation
+        
+        ok = True
+        try:
+            xc = float(self.xc_textin.text)   # read value of 'XC' from textinput
+            if xc <= 0:                   # bad value !
+                ok = False
+                self.xc_textin.text = self.xc_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.xc_textin.text = self.xc_textin.text + ' ?'  
+        try:
+            f = float(self.f_textin.text)   # read  value of 'f' from textinput
+            if f <= 0:                  # bad value !
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'  
+        if ok:
+            C = 1000000000/(2*pi*f*xc)         #  C  in nF !!
+            self.c_textin.text = str(C)   # write  'L' 
+        else:
+            self.c_textin.text = "hiba!!"  
+
+
+    def f_button_click(self):
+        #  f calculation
+        
+        ok = True
+        try:
+            C = float(self.c_textin.text)   # read value of 'C' from textinput
+            if C <= 0:                   # bad value !
+                ok = False
+                self.c_textin.text = self.c_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.c_textin.text = self.c_textin.text + ' ?'  
+        try:
+            xc = float(self.xc_textin.text)   # read  value of 'XC' from textinput
+            if xc <= 0:                  # bad value !
+                ok = False
+                self.xc_textin.text = self.xc_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.xc_textin.text = self.xc_textin.text + ' ?'  
+        if ok:
+            f = 1000000000/(2*pi*C*xc)      #  f  in Hz !!
+            self.f_textin.text = str(f)   # write  'f' 
+        else:
+            self.f_textin.text = "hiba!!"  
+
+
+
+###########################################################################################
+
 
 
 class Fo_GridL(GridLayout):
