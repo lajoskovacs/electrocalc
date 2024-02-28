@@ -416,49 +416,83 @@ Builder.load_string('''
 
 ''')
 
+###########################################################################################
+
 
 class PageLabel(TextInput):
     pass
+
+###########################################################################################
 
 
 class XL_GridL(GridLayout):
 
     def xl_button_click(self):
-        self.xl_textin.text = 'klik'
-        return
+        #  XL calculation
+        
+        ok = True
+        try:
+            L = float(self.l_textin.text)   # read value of 'L' from textinput
+            if L <= 0:                   # bad value !
+                ok = False
+                self.l_textin.text = self.l_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.l_textin.text = self.l_textin.text + ' ?'  
+        try:
+            f = float(self.f_textin.text)   # read  value of 'f' from textinput
+            if f <= 0:                  # bad value !
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'  
+        if ok:
+            xl = 2*pi*f*L/1000         #  XL  in Ohm !!
+            self.xl_textin.text = str(xl)   # write  'XL' 
+        else:
+            self.xl_textin.text = "hiba!!"  
 
 
 
 
 
+###########################################################################################
 
 
 
 class XC_GridL(GridLayout):
     pass
 
+
 class Fo_GridL(GridLayout):
     pass
+
 
 class RLC_GridL(GridLayout):
     pass
 
+
 class R_GridL(GridLayout):
     pass
+
 
 class RC_GridL(GridLayout):
     pass
 
+
 class CR_GridL(GridLayout):
     pass
+
+###########################################################################################
+
 
 class EcalcWidget(TabbedPanel):
 
     def __init__(self):
         super().__init__()
 
-
-  
+ 
       
 class EcalcApp(App):
 
