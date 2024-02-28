@@ -7,8 +7,8 @@
 # os.environ['KIVY_NO_CONSOLELOG']='1'
 
 from kivy.config import Config 
-Config.set('graphics','width','520')
-Config.set('graphics','height','1100')
+Config.set('graphics','width','360')
+Config.set('graphics','height','800')
 # Config.set('graphics','resizable','0')
 
 from kivy.lang import Builder
@@ -31,51 +31,31 @@ from kivy.uix.gridlayout import GridLayout
 
 Builder.load_string('''
 
+<PageLabel>:				
+	font_size: '18sp'
+    foreground_color:1,0,0,1
+    background_color:1,1,0,1
+    multiline: False
+    readonly: True   
+
+
 <EcalcWidget>:
     do_default_tab: False
 
     TabbedPanelItem:
         text: 'XL'
         BoxLayout:
-            orientation: 'vertical'       
-            GridLayout:
-                cols: 2
-                padding: '10dp'
-                spacing: '20dp'
-                size_hint: 1, 1/2
-                TextInput:				
-                    text: 'Induktív reaktancia'	
-                    size_hint: 1, 1/2
-		            font_size: '20sp'
-                    foreground_color:1,0,0,1
-                    background_color:1,1,0,1
-                    multiline: False
-                    readonly: True
-                TextInput:				
-                    text: '??'
-                    size_hint: 1, 1/2
+            orientation: 'vertical'   
+            size_hint: 1, 1/3
+            PageLabel:				
+                text: 'Induktív reaktancia'	
+                size_hint: 1, 1/8
 
-                Button:
-                    text: 'L'
-                TextInput:				
-                    text: 'ha'		
-		            font_size: '20sp'
-                Button:
-                    text: 'f'
-                TextInput:				
-                    text: 'ha'		
-		            font_size: '20sp'
-                Button:
-                    text: 'XL'
-                TextInput:				
-                    text: 'ha'		
-		            font_size: '20sp'
+            XL_GridL:
+                size_hint: 1, 7/8
+ 
 
-
-            BoxLayout:
-                orientation: 'vertical'  
-                size_hint: 1, 1/2        
-
+ 
 
     TabbedPanelItem:
         text: 'XC'
@@ -88,16 +68,48 @@ Builder.load_string('''
         BoxLayout:   
 
 
+<XL_GridL>:
+    cols: 2
+    padding: '10dp'
+    spacing: '20dp'
+        
+    Button:
+        text: 'L'
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+    Button:
+        text: 'f'
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+    Button:
+        text: 'XL'
+    TextInput:				
+        text: 'ha'		
+		font_size: '16sp'
+
+
+
 
 
 ''')
 
 
+class PageLabel(TextInput):
+    pass
+
+
+class XL_GridL(GridLayout):
+    pass
+
+
 
 class EcalcWidget(TabbedPanel):
-	
+
     def __init__(self):
         super().__init__()
+
       
 
 
