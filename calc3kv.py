@@ -55,17 +55,25 @@ Builder.load_string('''
                 size_hint: 1, 7/8
  
 
- 
-
     TabbedPanelItem:
         text: 'XC'
         BoxLayout:           
 
 
-
     TabbedPanelItem:
         text: 'fo'
         BoxLayout:   
+
+
+    TabbedPanelItem:
+        text: 'RLC'
+        BoxLayout:           
+
+
+    TabbedPanelItem:
+        text: 'R'
+        BoxLayout:   
+
 
 
 <XL_GridL>:
@@ -74,20 +82,26 @@ Builder.load_string('''
     spacing: '20dp'
         
     Button:
-        text: 'L'
+        text: 'Frekvencia, f (Hz)'
+        color: 0.5, 0.6, 0.7, 1
     TextInput:				
         text: 'ha'		
 		font_size: '16sp'
+        foreground_color:1,0,0,1
     Button:
-        text: 'f'
+        text: 'Induktivitás, L (mH)'
+        color: 0.5, 0.6, 0.7, 1
     TextInput:				
         text: 'ha'		
 		font_size: '16sp'
+        foreground_color:1,0,0,1
     Button:
-        text: 'XL'
+        text: 'XL (ohm)'
+        color: 0.5, 0.6, 0.7, 1
     TextInput:				
         text: 'ha'		
 		font_size: '16sp'
+        foreground_color:1,0,0,1
 
 
 
