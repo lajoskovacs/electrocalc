@@ -43,7 +43,7 @@ Builder.load_string('''
     do_default_tab: False
 
     TabbedPanelItem:
-        text: 'XL'L
+        text: 'XL'
         BoxLayout:
             orientation: 'vertical'   
             size_hint: 1, 1/3
@@ -208,6 +208,9 @@ Builder.load_string('''
 
 
 <Fo_GridL>:
+    l_textin: L_text
+    c_textin: C_text
+    f_textin: f_text
     cols: 2
     padding: '10dp'
     spacing: '20dp'
@@ -215,24 +218,31 @@ Builder.load_string('''
     Button:
         text: 'Induktivitás, L (mH)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        on_press: root.l_button_click()
+    TextInput:	
+        id: L_text			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        on_press: root.c_button_click()
+    TextInput:	
+        id: C_text			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Rezonancia fr. fo (Hz)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        on_press: root.f_button_click()
+    TextInput:	
+        id: f_text			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
+
 
 
 <RLC_GridL>:
@@ -433,8 +443,8 @@ Builder.load_string('''
 class PageLabel(TextInput):
     pass
 
-###########################################################################################
 
+###########################################################################################
 
 class XL_GridL(GridLayout):
 
@@ -518,11 +528,7 @@ class XL_GridL(GridLayout):
         else:
             self.f_textin.text = "hiba!!"  
 
-
-
 ###########################################################################################
-
-
 
 class XC_GridL(GridLayout):
 
@@ -606,15 +612,92 @@ class XC_GridL(GridLayout):
         else:
             self.f_textin.text = "hiba!!"  
 
+###########################################################################################
+
+class Fo_GridL(GridLayout):
+
+    def l_button_click(self):
+        #  L calculation
+        
+        ok = True
+        try:
+            C = float(self.c_textin.text)   # read value of 'C' from textinput
+            if C <= 0:                   # bad value !
+                ok = False
+                self.c_textin.text = self.c_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.c_textin.text = self.c_textin.text + ' ?'  
+        try:
+            f = float(self.f_textin.text)   # read  value of 'f' from textinput
+            if f <= 0:                  # bad value !
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'  
+        if ok:
+            L = 1000000000000/(4*pi*pi*f*f*C)        #  L  in mH !!
+            self.l_textin.text = str(L)   # write  'L' 
+        else:
+            self.l_textin.text = "hiba!!"  
+
+
+    def c_button_click(self):
+        #  C calculation
+        
+        ok = True
+        try:
+            L = float(self.l_textin.text)   # read value of 'L' from textinput
+            if L <= 0:                   # bad value !
+                ok = False
+                self.l_textin.text = self.l_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.l_textin.text = self.l_textin.text + ' ?'  
+        try:
+            f = float(self.f_textin.text)   # read  value of 'f' from textinput
+            if f <= 0:                  # bad value !
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'  
+        if ok:
+            C = 1000000000000/(4*pi*pi*f*f*L)         #  C  in nF !!
+            self.c_textin.text = str(C)   # write  'C' 
+        else:
+            self.c_textin.text = "hiba!!"  
+
+
+    def f_button_click(self):
+        #  f calculation
+        
+        ok = True
+        try:
+            C = float(self.c_textin.text)   # read value of 'C' from textinput
+            if C <= 0:                   # bad value !
+                ok = False
+                self.c_textin.text = self.c_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.c_textin.text = self.c_textin.text + ' ?'  
+        try:
+            L = float(self.l_textin.text)   # read  value of 'L' from textinput
+            if L <= 0:                  # bad value !
+                ok = False
+                self.l_textin.text = self.l_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.l_textin.text = self.l_textin.text + ' ?'  
+        if ok:
+            f = 1000000/(2*pi*sqrt(C*L))      #  f  in Hz !!
+            self.f_textin.text = str(f)   # write  'f' 
+        else:
+            self.f_textin.text = "hiba!!"  
 
 
 ###########################################################################################
-
-
-
-class Fo_GridL(GridLayout):
-    pass
-
 
 class RLC_GridL(GridLayout):
     pass
