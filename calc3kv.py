@@ -313,6 +313,12 @@ Builder.load_string('''
 
 
 <RC_GridL>:
+    c_textin: C_text
+    r_textin: R_text
+    f_textin: f_text
+    tr_textin: tr_text
+    fi_textin: fi_text 
+    fh_textin: fh_text 
     cols: 2
     padding: '10dp'
     spacing: '10dp'
@@ -321,27 +327,32 @@ Builder.load_string('''
         text: 'Frekvencia, f (Hz)'
         color: 1, 1, 0, 1
     TextInput:				
+        id: f_text
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1    
     Button:
         text: 'Ellenállás, R (ohm)'
         color: 1, 1, 0, 1
-    TextInput:				
+    TextInput:	
+        id: R_text    			
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 1, 1, 0, 1
-    TextInput:				
+    TextInput:	
+        id: C_text			
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Feszültség átv., Uki/Ube'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+        on_press: root.tr_button_click()
+    TextInput:
+        id: tr_text    				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -350,7 +361,9 @@ Builder.load_string('''
     Button:
         text: 'Fázistolás, ki-be (fok)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+        on_press: root.tr_button_click()
+    TextInput:	
+        id: fi_text			
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -359,7 +372,9 @@ Builder.load_string('''
     Button:
         text: 'Határfrekvencia, fh (Hz)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+        on_press: root.tr_button_click()
+    TextInput:
+        id: fh_text   				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -367,6 +382,12 @@ Builder.load_string('''
         readonly: True
 
 <CR_GridL>:
+    c_textin: C_text
+    r_textin: R_text
+    f_textin: f_text
+    tr_textin: tr_text
+    fi_textin: fi_text 
+    fh_textin: fh_text 
     cols: 2
     padding: '10dp'
     spacing: '10dp'
@@ -374,28 +395,33 @@ Builder.load_string('''
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 1, 1, 0, 1
-    TextInput:				
+    TextInput:
+        id: f_text  				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1    
     Button:
         text: 'Ellenállás, R (ohm)'
         color: 1, 1, 0, 1
-    TextInput:				
+    TextInput:
+        id: R_text				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 1, 1, 0, 1
-    TextInput:				
+    TextInput:
+        id: C_text				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Feszültség átv., Uki/Ube'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+        on_press: root.tr_button_click()
+    TextInput:
+        id: tr_text				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -404,7 +430,9 @@ Builder.load_string('''
     Button:
         text: 'Fázistolás, ki-be (fok)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+        on_press: root.tr_button_click()
+    TextInput:
+        id: fi_text				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -413,7 +441,9 @@ Builder.load_string('''
     Button:
         text: 'Határfrekvencia, fh (Hz)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
+        on_press: root.tr_button_click()
+    TextInput:
+        id: fh_text				
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -451,6 +481,7 @@ Builder.load_string('''
     Button:
         text: 'Ellenállás, R (ohm)'
         color: 0.5, 0.6, 0.7, 1
+        on_press: root.r_button_click()
     TextInput:				
         text: ''		
 		font_size: '16sp'
@@ -789,15 +820,113 @@ class RLC_GridL(GridLayout):
 ###########################################################################################
 
 class R_GridL(GridLayout):
-    pass
 
+    def r_button_click(self):
+        ok = True 
+
+
+
+###########################################################################################
 
 class RC_GridL(GridLayout):
-    pass
 
+    def tr_button_click(self):
+        ok = True 
+        try:
+            f = float(self.f_textin.text)   # read 'f' 
+            if f <= 0:
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !               
+        except:
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !
+        try:
+            R = float(self.r_textin.text)   # read  'R'
+            if R <= 0:
+                ok = False
+                self.r_textin.text = self.r_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.r_textin.text = self.r_textin.text + ' ?'   # wrong value ! 
+        try:
+            C = float(self.c_textin.text)   # read  'C' 
+            if C <= 0:
+                ok = False
+                self.c_textin.text = self.c_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.c_textin.text = self.c_textin.text + ' ?'   # wrong value !                      
+        if ok:                          #  all input data are ok
+            if f==0:
+                Tr = 1
+                fi = 0
+            else:
+                xc = 1000000000/(2*pi*f*C)        #  XC  in  Ohm !!
+                Ze = sqrt(R**2+xc**2)
+                Tr = xc/Ze                  # Uout / Uin
+                fi = -180*atan(R/xc)/pi
+
+            fh=1000000000/(2*pi*R*C)
+
+            self.tr_textin.text = str(Tr)   # 'Tr' write
+            self.fi_textin.text = str(fi)   # 'fi' write
+            self.fh_textin.text = str(fh)   # 'fh' write
+
+        else:
+            self.tr_textin.text = "hiba!!"     
+            self.fi_textin.text = "hiba!!"  
+            self.fh_textin.text = "hiba!!" 
+
+
+###########################################################################################
 
 class CR_GridL(GridLayout):
-    pass
+
+    def tr_button_click(self):
+        ok = True 
+        try:
+            f = float(self.f_textin.text)   # read 'f' 
+            if f <= 0:
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !               
+        except:
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !
+        try:
+            R = float(self.r_textin.text)   # read  'R'
+            if R <= 0:
+                ok = False
+                self.r_textin.text = self.r_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.r_textin.text = self.r_textin.text + ' ?'   # wrong value ! 
+        try:
+            C = float(self.c_textin.text)   # read  'C' 
+            if C <= 0:
+                ok = False
+                self.c_textin.text = self.c_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.c_textin.text = self.c_textin.text + ' ?'   # wrong value !                      
+        if ok:                          #  all input data are ok
+            if f==0:
+                Tr = 1
+                fi = 0
+            else:
+                xc = 1000000000/(2*pi*f*C)        #  XC  in  Ohm !!
+                Ze = sqrt(R**2+xc**2)
+                Tr = R/Ze                   # Uout / Uin
+                fi = 180*atan(xc/R)/pi
+              
+            fh=1000000000/(2*pi*R*C)
+            self.tr_textin.text = str(Tr)   # 'Tr' write
+            self.fi_textin.text = str(fi)   # 'fi' write
+            self.fh_textin.text = str(fh)   # 'fh' write
+
+        else:
+            self.tr_textin.text = "hiba!!"     
+            self.fi_textin.text = "hiba!!"  
+            self.fh_textin.text = "hiba!!" 
 
 ###########################################################################################
 
