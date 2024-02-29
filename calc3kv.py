@@ -452,6 +452,10 @@ Builder.load_string('''
 
 
 <R_GridL>:
+    l_textin: l_text
+    d_textin: d_text
+    mat_spin: mat_spin
+    r_textin: R_text
     cols: 2
     padding: '10dp'
     spacing: '20dp'
@@ -459,14 +463,16 @@ Builder.load_string('''
     Button:
         text: 'Hossz, l (m)'
         color: 1, 1, 0, 1
-    TextInput:				
+    TextInput:	
+        id: l_text			
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1    
     Button:
         text: 'Átmérő, d (mm)'
         color: 1, 1, 0, 1
-    TextInput:				
+    TextInput:	
+        id: d_text			
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -474,6 +480,7 @@ Builder.load_string('''
         text: 'Anyag'
         color: 1, 1, 0, 1
     Spinner: 
+        id: mat_spin
         text: "Réz"
 		font_size: '16sp'
         foreground_color:1,0,0,1	        
@@ -482,7 +489,8 @@ Builder.load_string('''
         text: 'Ellenállás, R (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.r_button_click()
-    TextInput:				
+    TextInput:		
+        id: R_text
         text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
@@ -822,9 +830,33 @@ class RLC_GridL(GridLayout):
 class R_GridL(GridLayout):
 
     def r_button_click(self):
+        materials = {'Réz':0.0175,'Alumínium':0.028,'Arany':0.023,'Ezüst':0.016 }
         ok = True 
-
-
+        try:
+            l = float(self.l_textin.text)   # read  'l'  (wire length)
+            if l <= 0:
+                ok = False
+                self.l_textin.text = self.l_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.l_textin.text = self.l_textin.text + ' ?'   # wrong value ! 
+        try:
+            d = float(self.d_textin.text)   # read  'd' (diameter)
+            if d <= 0:
+                ok = False
+                self.d_textin.text = self.d_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.d_textin.text = self.d_textin.text + ' ?'   # wrong value !
+        if ok:                              #  all input data are ok
+            mat = self.mat_spin.text             # read material
+            ro = materials[mat]
+            A = d*d*pi/4                    # cross-section  mm2
+            R = ro*l/A                      #  resistance   in  ohm !!
+            self.r_textin.text = str(R)   # 'R' write
+        else:
+            self.r_textin.text = "hiba!!"                           
+                                 
 
 ###########################################################################################
 
@@ -834,7 +866,7 @@ class RC_GridL(GridLayout):
         ok = True 
         try:
             f = float(self.f_textin.text)   # read 'f' 
-            if f <= 0:
+            if f < 0:
                 ok = False
                 self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !               
         except:
@@ -886,7 +918,7 @@ class CR_GridL(GridLayout):
         ok = True 
         try:
             f = float(self.f_textin.text)   # read 'f' 
-            if f <= 0:
+            if f < 0:
                 ok = False
                 self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !               
         except:
