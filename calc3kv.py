@@ -373,48 +373,52 @@ Builder.load_string('''
 
     Button:
         text: 'Frekvencia, f (Hz)'
-        color: 0.5, 0.6, 0.7, 1
+        color: 1, 1, 0, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1    
     Button:
         text: 'Ellenállás, R (ohm)'
-        color: 0.5, 0.6, 0.7, 1
+        color: 1, 1, 0, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
-        color: 0.5, 0.6, 0.7, 1
+        color: 1, 1, 0, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Feszültség átv., Uki/Ube'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
-
+        background_color:1,1,0,1            
+        readonly: True
     Button:
         text: 'Fázistolás, ki-be (fok)'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
-
+        background_color:1,1,0,1            
+        readonly: True
     Button:
         text: 'Határfrekvencia, fh (Hz)'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
+        background_color:1,1,0,1            
+        readonly: True
 
 
 <R_GridL>:
