@@ -428,21 +428,21 @@ Builder.load_string('''
 
     Button:
         text: 'Hossz, l (m)'
-        color: 0.5, 0.6, 0.7, 1
+        color: 1, 1, 0, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1    
     Button:
         text: 'Átmérő, d (mm)'
-        color: 0.5, 0.6, 0.7, 1
+        color: 1, 1, 0, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Anyag'
-        color: 0.5, 0.6, 0.7, 1
+        color: 1, 1, 0, 1
     Spinner: 
         text: "Réz"
 		font_size: '16sp'
@@ -452,9 +452,11 @@ Builder.load_string('''
         text: 'Ellenállás, R (ohm)'
         color: 0.5, 0.6, 0.7, 1
     TextInput:				
-        text: 'ha'		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
+        background_color:1,1,0,1            
+        readonly: True
 
 
 ''')
