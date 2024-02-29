@@ -246,55 +246,71 @@ Builder.load_string('''
 
 
 <RLC_GridL>:
+    l_textin: L_text
+    c_textin: C_text
+    r_textin: R_text
+    f_textin: f_text
+    ze_textin: Ze_text
+    fi_textin: fi_text                
     cols: 2
     padding: '10dp'
     spacing: '10dp'
 
     Button:
         text: 'Frekvencia, f (Hz)'
-        color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        color: 1, 1, 0, 1
+    TextInput:		
+        id: f_text		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1    
     Button:
         text: 'Induktivitás, L (mH)'
-        color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        color: 1, 1, 0, 1
+    TextInput:		
+        id: L_text		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
-        color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        color: 1, 1, 0, 1
+    TextInput:		
+        id: C_text		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
     Button:
         text: 'Ellenállás, R (ohm)'
-        color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        color: 1, 1, 0, 1
+    TextInput:		
+        id: R_text		
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
 
     Button:
         text: 'Impedancia, Ze (ohm)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        on_press: root.ze_button_click()            
+    TextInput:	
+        id: Ze_text          			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
-
+        background_color:1,1,0,1            
+        readonly: True
     Button:
         text: 'Fázisszög, fi (fok)'
         color: 0.5, 0.6, 0.7, 1
-    TextInput:				
-        text: 'ha'		
+        on_press: root.ze_button_click()            
+    TextInput:	
+        id: fi_text          			
+        text: ''		
 		font_size: '16sp'
         foreground_color:1,0,0,1
-
+        background_color:1,1,0,1            
+        readonly: True
 
 
 <RC_GridL>:
@@ -700,8 +716,69 @@ class Fo_GridL(GridLayout):
 ###########################################################################################
 
 class RLC_GridL(GridLayout):
-    pass
+    
+    def ze_button_click(self):
+        ok = True  
+        try:
+            f = float(self.f_textin.text)   # read 'f' 
+            if f <= 0:
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !               
+        except:
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !
+        try:
+            L = float(self.l_textin.text)   # read  'L'
+            if L < 0:
+                ok = False
+                self.l_textin.text = self.l_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.l_textin.text = self.l_textin.text + ' ?'   # wrong value ! 
+        try:
+            C = float(self.c_textin.text)   # read  'C' 
+            if C < 0:
+                ok = False
+                self.c_textin.text = self.c_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.c_textin.text = self.c_textin.text + ' ?'   # wrong value !
+        try:
+            R = float(self.r_textin.text)   # read 'R' beolvasása szövegmezőből
+            if R < 0:
+                ok = False
+                self.r_textin.text = self.r_textin.text + ' ?'   #  wrong value !
+        except:
+            ok = False
+            self.r_textin.text = self.r_textin.text + ' ?'   #  wrong value !                       
+        if ok:                          #  all input data are ok
+            if L == 0:
+                xl = 0
+            else:
+                xl = 2*pi*f*L/1000         #  XL  in Ohm !!
+            if C == 0:
+                xc = 0
+            else:
+                xc = 1000000000/(2*pi*f*C)        #  XC   in Ohm !!
+            Ze = sqrt(R**2+(xl-xc)**2)
+            if R == 0:
+                if xl>xc:
+                    fi = 90
+                elif xc>xl:
+                    fi = -90
+                else:
+                    fi = ""
+            else:
+                fi = 180*atan((xl-xc)/R)/pi
 
+            self.ze_textin.text = str(Ze)   # 'Ze' kiírása szövegmezőbe
+            self.fi_textin.text = str(fi)   # 'fi' kiírása szövegmezőbe
+
+        else:
+            self.ze_textin.text = "hiba!!"     
+            self.fi_textin.text = "hiba!!"     
+
+###########################################################################################
 
 class R_GridL(GridLayout):
     pass
