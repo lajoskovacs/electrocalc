@@ -38,6 +38,19 @@ Builder.load_string('''
     multiline: False
     readonly: True   
 
+<MyTextInput>:				
+    text: ''		
+	font_size: '16sp'
+    foreground_color:1,0,0,1
+    multiline: False
+
+<MyTextInputRonly>:				
+    text: ''		
+	font_size: '16sp'
+    foreground_color:1,0,0,1
+    multiline: False
+    background_color:1,1,0,1            
+    readonly: True
 
 <EcalcWidget>:
     do_default_tab: False
@@ -145,29 +158,20 @@ Builder.load_string('''
         text: 'Frekvencia, f (Hz)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.f_button_click()
-    TextInput:	
-        id: f_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
+    MyTextInput:	
+        id: f_text			 
     Button:
         text: 'Induktivitás, L (mH)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.l_button_click()
-    TextInput:			
+    MyTextInput:			
         id: L_text	
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'XL (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.xl_button_click()
-    TextInput:		
+    MyTextInput:		
         id: xl_text		
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
 
 
 <XC_GridL>:
@@ -182,30 +186,21 @@ Builder.load_string('''
         text: 'Frekvencia, f (Hz)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.f_button_click()
-    TextInput:	
+    MyTextInput:	
         id: f_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.c_button_click()
-    TextInput:	
+    MyTextInput:	
         id: C_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'XC (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.xc_button_click()
-    TextInput:	
+    MyTextInput:	
         id: xc_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-
+ 
 
 <Fo_GridL>:
     l_textin: L_text
@@ -219,30 +214,20 @@ Builder.load_string('''
         text: 'Induktivitás, L (mH)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.l_button_click()
-    TextInput:	
+    MyTextInput:	
         id: L_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.c_button_click()
-    TextInput:	
+    MyTextInput:	
         id: C_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Rezonancia fr. fo (Hz)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.f_button_click()
-    TextInput:	
+    MyTextInput:	
         id: f_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-
 
 
 <RLC_GridL>:
@@ -259,57 +244,35 @@ Builder.load_string('''
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 1, 1, 0, 1
-    TextInput:		
-        id: f_text		
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1    
+    MyTextInput:		
+        id: f_text		 
     Button:
         text: 'Induktivitás, L (mH)'
         color: 1, 1, 0, 1
-    TextInput:		
+    MyTextInput:		
         id: L_text		
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 1, 1, 0, 1
-    TextInput:		
+    MyTextInput:		
         id: C_text		
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Ellenállás, R (ohm)'
         color: 1, 1, 0, 1
-    TextInput:		
+    MyTextInput:		
         id: R_text		
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Impedancia, Ze (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.ze_button_click()            
-    TextInput:	
+    MyTextInputRonly:	
         id: Ze_text          			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
     Button:
         text: 'Fázisszög, fi (fok)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.ze_button_click()            
-    TextInput:	
+    MyTextInputRonly:	
         id: fi_text          			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
 
 
 <RC_GridL>:
@@ -326,60 +289,36 @@ Builder.load_string('''
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 1, 1, 0, 1
-    TextInput:				
-        id: f_text
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1    
+    MyTextInput:				
+        id: f_text  
     Button:
         text: 'Ellenállás, R (ohm)'
         color: 1, 1, 0, 1
-    TextInput:	
+    MyTextInput:	
         id: R_text    			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 1, 1, 0, 1
-    TextInput:	
+    MyTextInput:	
         id: C_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Feszültség átv., Uki/Ube'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
-    TextInput:
+    MyTextInputRonly:
         id: tr_text    				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
     Button:
         text: 'Fázistolás, ki-be (fok)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
-    TextInput:	
+    MyTextInputRonly:	
         id: fi_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
     Button:
         text: 'Határfrekvencia, fh (Hz)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
-    TextInput:
+    MyTextInputRonly:
         id: fh_text   				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
 
 <CR_GridL>:
     c_textin: C_text
@@ -395,61 +334,37 @@ Builder.load_string('''
     Button:
         text: 'Frekvencia, f (Hz)'
         color: 1, 1, 0, 1
-    TextInput:
+    MyTextInput:
         id: f_text  				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1    
     Button:
         text: 'Ellenállás, R (ohm)'
         color: 1, 1, 0, 1
-    TextInput:
+    MyTextInput:
         id: R_text				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Kapacitás, C (nF)'
         color: 1, 1, 0, 1
-    TextInput:
+    MyTextInput:
         id: C_text				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Feszültség átv., Uki/Ube'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
-    TextInput:
+    MyTextInputRonly:
         id: tr_text				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
     Button:
         text: 'Fázistolás, ki-be (fok)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
-    TextInput:
+    MyTextInputRonly:
         id: fi_text				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
     Button:
         text: 'Határfrekvencia, fh (Hz)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
-    TextInput:
+    MyTextInputRonly:
         id: fh_text				
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
-
+   
 
 <R_GridL>:
     l_textin: l_text
@@ -463,19 +378,13 @@ Builder.load_string('''
     Button:
         text: 'Hossz, l (m)'
         color: 1, 1, 0, 1
-    TextInput:	
-        id: l_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1    
+    MyTextInput:	
+        id: l_text			   
     Button:
         text: 'Átmérő, d (mm)'
         color: 1, 1, 0, 1
-    TextInput:	
+    MyTextInput:	
         id: d_text			
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
     Button:
         text: 'Anyag'
         color: 1, 1, 0, 1
@@ -489,14 +398,9 @@ Builder.load_string('''
         text: 'Ellenállás, R (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.r_button_click()
-    TextInput:		
+    MyTextInputRonly:		
         id: R_text
-        text: ''		
-		font_size: '16sp'
-        foreground_color:1,0,0,1
-        background_color:1,1,0,1            
-        readonly: True
-
+    
 
 ''')
 
@@ -504,6 +408,13 @@ Builder.load_string('''
 
 
 class PageLabel(TextInput):
+    pass
+
+
+class MyTextInput(TextInput):
+    pass
+
+class MyTextInputRonly(TextInput):
     pass
 
 
