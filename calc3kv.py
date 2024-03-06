@@ -134,25 +134,30 @@ Builder.load_string('''
         text: 'RC'
         BoxLayout:   
             orientation: 'vertical'   
-            size_hint: 1, 1/2
+            size_hint: 1, 3/4
             PageLabel:				
                 text: 'RC szűrő (aluláteresztő)'	
-                size_hint: 1, 1/7
+                size_hint: 1, 1/10
             RC_GridL:
-                size_hint: 1, 6/7
+                size_hint: 1, 6/10
+            MyCircuit:
+                ctyp: 'RC'
+                size_hint: 0.5, 3/10
 
 
     TabbedPanelItem:
         text: 'CR'
         BoxLayout:   
             orientation: 'vertical'   
-            size_hint: 1, 1/2
+            size_hint: 1, 3/4
             PageLabel:				
                 text: 'CR szűrő (felüláteresztő)'	
-                size_hint: 1, 1/7
+                size_hint: 1, 1/10
             CR_GridL:
-                size_hint: 1, 6/7
-
+                size_hint: 1, 6/10
+            MyCircuit:
+                ctyp: 'CR'
+                size_hint: 0.5, 3/10
 
 
 <XL_GridL>:
