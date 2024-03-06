@@ -451,8 +451,8 @@ class MyCircuit(RelativeLayout):
         else:
             ye=xe
         with self.canvas:
-            Color(1, 1, 1)
-            Rectangle(pos=[0,0],size=self.size)
+            #Color(1, 1, 1)
+            #Rectangle(pos=[0,0],size=self.size)
             Color(1, 0, 0)           
             Line(points=[10*xe,16*ye,40*xe,16*ye],width=2)    # alsó vonal
             # felső alkatrész
