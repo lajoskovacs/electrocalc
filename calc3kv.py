@@ -24,8 +24,10 @@ from kivy.uix.label import Label
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
-#from kivy.properties import ObjectProperty
-#from kivy.graphics import Color, Ellipse, Line, Rectangle, Point, GraphicException
+from kivy.uix.relativelayout import RelativeLayout
+from kivy.properties import NumericProperty
+from kivy.properties import StringProperty
+from kivy.graphics import Color, Ellipse, Line, Rectangle, Point, GraphicException
 
 
 
@@ -51,6 +53,13 @@ Builder.load_string('''
     multiline: False
     background_color:1,1,0,1            
     readonly: True
+
+
+<MyCircuit>:
+	xe: self.size[0]/50
+	ye: self.size[1]/50
+	on_size: self.circdraw()
+       
 
 <EcalcWidget>:
     do_default_tab: False
@@ -417,6 +426,66 @@ class MyTextInput(TextInput):
 class MyTextInputRonly(TextInput):
     pass
 
+
+class MyCircuit(RelativeLayout):
+    xe = NumericProperty(2)	# x unit
+    ye = NumericProperty(2)	# y unit
+    ctyp = StringProperty('CR')  # circuit type ->  RC,  CR, 
+    
+    def __init__(self,**kwargs):
+        super(MyCircuit,self).__init__(**kwargs)
+        self.circdraw()
+		
+    def circdraw(self):
+        ''' áramkör kirajzoló függvény   '''
+        self.canvas.clear()    
+        xe = self.xe
+        ye = self.ye
+        if xe>ye:
+            xe=ye
+        else:
+            ye=xe
+        with self.canvas:
+            Color(1, 1, 1)
+            Rectangle(pos=[0,0],size=self.size)
+            Color(1, 0, 0)           
+            Line(points=[10*xe,16*ye,40*xe,16*ye],width=2)    # alsó vonal
+            # felső alkatrész
+            if self.ctyp=='RC' or self.ctyp=='RL':                # ellenállás felül
+                Line(points=[10*xe,40*ye,16*xe,40*ye],width=2)  # bal kivezetés
+                Line(rectangle=(16*xe,38*ye,12*xe,4*ye),width=2)       # R test
+                Line(points=[28*xe,40*ye,40*xe,40*ye],width=2)    # jobb kivezetés
+            elif self.ctyp=='CR' or self.ctyp=='CL':              # kondi felül
+                Line(points=[10*xe,40*ye,20*xe,40*ye],width=2)  # bal kivezetés
+                Line(points=[20*xe,43*ye,20*xe,37*ye],width=2)       # C test
+                Line(points=[23*xe,43*ye,23*xe,37*ye],width=2)
+                Line(points=[23*xe,40*ye,40*xe,40*ye],width=2)    # jobb kivezetés
+            elif self.ctyp=='LR' or self.ctyp=='LC':              # tekercs felül    
+                Line(points=[10*xe,40*ye,14*xe,40*ye],width=2)  # bal kivezetés
+                Line(circle=(16*xe,40*ye,2*xe,90,-90),width=2)       # L test
+                Line(circle=(20*xe,40*ye,2*xe,90,-90),width=2)
+                Line(circle=(24*xe,40*ye,2*xe,90,-90),width=2)
+                Line(circle=(28*xe,40*ye,2*xe,90,-90),width=2)
+                Line(points=[30*xe,40*ye,40*xe,40*ye],width=2)    # jobb kivezetés 
+                      
+             # kimeneti alkatrész
+            if self.ctyp=='CR' or self.ctyp=='LR':                # ellenállás a kimeneten
+                Line(points=[34*xe,40*ye,34*xe,34*ye],width=2)  # felső kivezetés  
+                Line(rectangle=(32*xe,22*ye,4*xe,12*ye),width=2)       # R test
+                Line(points=[34*xe,22*ye,34*xe,16*ye],width=2)  # alsó kivezetés 
+            elif self.ctyp=='RC' or self.ctyp=='LC':              # kondi a kimeneten
+                Line(points=[34*xe,40*ye,34*xe,30*ye],width=2)  # felső kivezetés
+                Line(points=[31*xe,30*ye,37*xe,30*ye],width=2)       # C test
+                Line(points=[31*xe,27*ye,37*xe,27*ye],width=2)
+                Line(points=[34*xe,27*ye,34*xe,16*ye],width=2)    # alsó kivezetés
+            elif self.ctyp=='RL' or self.ctyp=='CL':              # tekercs a kimeneten
+                Line(points=[34*xe,40*ye,34*xe,36*ye],width=2)  # felső kivezetés
+                Line(circle=(34*xe,34*ye,2*xe,0,180),width=2)       # L test
+                Line(circle=(34*xe,30*ye,2*xe,0,180),width=2)
+                Line(circle=(34*xe,26*ye,2*xe,0,180),width=2)
+                Line(circle=(34*xe,22*ye,2*xe,0,180),width=2)
+                Line(points=[34*xe,20*ye,34*xe,16*ye],width=2)    # alsó kivezetés    
+        
 
 ###########################################################################################
 
