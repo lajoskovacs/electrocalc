@@ -160,6 +160,24 @@ Builder.load_string('''
                 size_hint: 0.5, 3/10
 
 
+    TabbedPanelItem:
+        text: 'RL'
+        BoxLayout:   
+            orientation: 'vertical'   
+            size_hint: 1, 3/4
+            PageLabel:				
+                text: 'RL szűrő (felűláteresztő)'	
+                size_hint: 1, 1/10
+            RL_GridL:
+                size_hint: 1, 6/10
+            MyCircuit:
+                ctyp: 'RL'
+                size_hint: 0.5, 3/10
+
+
+
+
+
 <XL_GridL>:
     xl_textin: xl_text
     l_textin: L_text
@@ -415,6 +433,52 @@ Builder.load_string('''
     MyTextInputRonly:		
         id: R_text
     
+
+<RL_GridL>:
+    l_textin: L_text
+    r_textin: R_text
+    f_textin: f_text
+    tr_textin: tr_text
+    fi_textin: fi_text 
+    fh_textin: fh_text 
+    cols: 2
+    padding: '10dp'
+    spacing: '10dp'
+
+    Button:
+        text: 'Frekvencia, f (Hz)'
+        color: 1, 1, 0, 1
+    MyTextInput:				
+        id: f_text  
+    Button:
+        text: 'Ellenállás, R (ohm)'
+        color: 1, 1, 0, 1
+    MyTextInput:	
+        id: R_text    			
+    Button:
+        text: 'Induktivitás, L (mH)'
+        color: 1, 1, 0, 1
+    MyTextInput:	
+        id: L_text			
+    Button:
+        text: 'Feszültség átv., Uki/Ube'
+        color: 0.5, 0.6, 0.7, 1
+        on_press: root.tr_button_click()
+    MyTextInputRonly:
+        id: tr_text    				
+    Button:
+        text: 'Fázistolás, ki-be (fok)'
+        color: 0.5, 0.6, 0.7, 1
+        on_press: root.tr_button_click()
+    MyTextInputRonly:	
+        id: fi_text			
+    Button:
+        text: 'Határfrekvencia, fh (Hz)'
+        color: 0.5, 0.6, 0.7, 1
+        on_press: root.tr_button_click()
+    MyTextInputRonly:
+        id: fh_text   				
+
 
 ''')
 
@@ -927,7 +991,7 @@ class CR_GridL(GridLayout):
             self.c_textin.text = self.c_textin.text + ' ?'   # wrong value !                      
         if ok:                          #  all input data are ok
             if f==0:
-                Tr = 1
+                Tr = 0
                 fi = 0
             else:
                 xc = 1000000000/(2*pi*f*C)        #  XC  in  Ohm !!
@@ -944,6 +1008,60 @@ class CR_GridL(GridLayout):
             self.tr_textin.text = "hiba!!"     
             self.fi_textin.text = "hiba!!"  
             self.fh_textin.text = "hiba!!" 
+
+
+###########################################################################################
+
+class RL_GridL(GridLayout):
+
+    def tr_button_click(self):
+        ok = True 
+        try:
+            f = float(self.f_textin.text)   # read 'f' 
+            if f < 0:
+                ok = False
+                self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !               
+        except:
+            ok = False
+            self.f_textin.text = self.f_textin.text + ' ?'   # wrong value !
+        try:
+            R = float(self.r_textin.text)   # read  'R'
+            if R <= 0:
+                ok = False
+                self.r_textin.text = self.r_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.r_textin.text = self.r_textin.text + ' ?'   # wrong value ! 
+        try:
+            L = float(self.l_textin.text)   # read  'L' 
+            if L <= 0:
+                ok = False
+                self.l_textin.text = self.l_textin.text + ' ?'   # wrong value !
+        except:
+            ok = False
+            self.l_textin.text = self.l_textin.text + ' ?'   # wrong value !                      
+        if ok:                          #  all input data are ok
+            if f==0:
+                Tr = 0
+                fi = 0
+            else:
+                xl = 2*pi*f*L/1000        #  XL  in  Ohm !!
+                Ze = sqrt(R**2+xl**2)
+                Tr = xl/Ze                  # Uout / Uin
+                fi = 180*atan(R/xl)/pi
+
+            fh=1000*R/(2*pi*L)
+
+            self.tr_textin.text = str(Tr)   # 'Tr' write
+            self.fi_textin.text = str(fi)   # 'fi' write
+            self.fh_textin.text = str(fh)   # 'fh' write
+
+        else:
+            self.tr_textin.text = "hiba!!"     
+            self.fi_textin.text = "hiba!!"  
+            self.fh_textin.text = "hiba!!" 
+
+
 
 ###########################################################################################
 
