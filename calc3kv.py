@@ -7,7 +7,7 @@
 # os.environ['KIVY_NO_CONSOLELOG']='1'
 
 from kivy.config import Config 
-Config.set('graphics','width','360')
+Config.set('graphics','width','400')
 Config.set('graphics','height','800')
 # Config.set('graphics','resizable','0')
 
