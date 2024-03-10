@@ -1,7 +1,7 @@
 # Electrotechnical calculations
 # XL, XC, Ze 
 #  R-L    R-C  L-C circuits
-# 2024.02.26. - 2024.03.    KL
+# 2024.02.26. - 2024.03. 10.   KL
 
 # import os
 # os.environ['KIVY_NO_CONSOLELOG']='1'
@@ -55,6 +55,69 @@ Builder.load_string('''
     readonly: True
 
 
+<Rcircuit_hor>:
+    du: self.size[0]/40 if self.size[0]/2 < self.size[1] else self.size[1]/20
+    w: 2
+    canvas:
+        Color:
+            rgb: (1, 0, 0)       
+        Line:
+            points: (0,10*self.du,8*self.du,10*self.du)
+            width: self.w
+        Line:
+            rectangle: (8*self.du,6*self.du,24*self.du,8*self.du)
+            width: self.w
+        Line:
+            points: (32*self.du,10*self.du,self.size[0],10*self.du)
+            width: self.w  
+
+
+<Lcircuit_hor>:
+    du: self.size[0]/40 if self.size[0]/2 < self.size[1] else self.size[1]/20
+    w: 2
+    canvas:
+        Color:
+            rgb: (1, 0, 0)       
+        Line:
+            points: (0,10*self.du,8*self.du,10*self.du)
+            width: self.w
+        Line:
+            circle: (11*self.du,10*self.du,3*self.du,90,-90)
+            width: self.w
+        Line:
+            circle: (17*self.du,10*self.du,3*self.du,90,-90)
+            width: self.w
+        Line:
+            circle: (23*self.du,10*self.du,3*self.du,90,-90)
+            width: self.w
+        Line:
+            circle: (29*self.du,10*self.du,3*self.du,90,-90)
+            width: self.w            
+        Line:
+            points: (32*self.du,10*self.du,self.size[0],10*self.du)
+            width: self.w 
+
+
+<Ccircuit_hor>:
+    du: self.size[0]/40 if self.size[0]/2 < self.size[1] else self.size[1]/20
+    w: 2
+    canvas:
+        Color:
+            rgb: (1, 0, 0)       
+        Line:
+            points: (0,10*self.du,16*self.du,10*self.du)
+            width: self.w
+        Line:
+            points: (16*self.du,4*self.du,16*self.du,16*self.du)
+            width: self.w
+        Line:
+            points: (22*self.du,4*self.du,22*self.du,16*self.du)
+            width: self.w    
+        Line:
+            points: (22*self.du,10*self.du,self.size[0],10*self.du)
+            width: self.w 
+   
+
 <MyCircuit>:
 	xe: self.size[0]/50
 	ye: self.size[1]/50
@@ -107,13 +170,18 @@ Builder.load_string('''
         text: 'RLC'
         BoxLayout:           
             orientation: 'vertical'   
-            size_hint: 1, 1/2
+            size_hint: 1, 6/10
             PageLabel:				
                 text: 'Soros RLC'	
-                size_hint: 1, 1/7
-
+                size_hint: 1, 1/9
             RLC_GridL:
-                size_hint: 1, 6/7
+                size_hint: 1, 7/9
+            BoxLayout:
+                pos_hint: {'x': 0.2}
+                size_hint: 3/5, 1/9
+                Rcircuit_hor
+                Lcircuit_hor
+                Ccircuit_hor  
 
 
     TabbedPanelItem:
@@ -553,6 +621,18 @@ class MyTextInput(TextInput):
 
 class MyTextInputRonly(TextInput):
     pass
+
+class Rcircuit_hor(RelativeLayout):
+    du = NumericProperty(2)	# draw unit
+    w = NumericProperty(2)  # width
+
+class Lcircuit_hor(RelativeLayout):
+    du = NumericProperty(2)	# draw unit
+    w = NumericProperty(2)  # width
+
+class Ccircuit_hor(RelativeLayout):
+    du = NumericProperty(2)	# draw unit
+    w = NumericProperty(2)  # width   
 
 
 class MyCircuit(RelativeLayout):
