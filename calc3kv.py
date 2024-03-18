@@ -258,6 +258,21 @@ Builder.load_string('''
                 size_hint: 0.5, 3/10
 
 
+    TabbedPanelItem:
+        text: 'bT'
+        BoxLayout:   
+            orientation: 'vertical'   
+            size_hint: 1, 3/4
+            PageLabel:				
+                text: 'Áthidalt T csillapító'	
+                size_hint: 1, 1/10
+            bT_GridL:
+                size_hint: 1, 6/10
+            BridgedTcircuit:
+                size_hint: 1/2, 3/10
+
+
+
 
 <XL_GridL>:
     xl_textin: xl_text
@@ -607,6 +622,53 @@ Builder.load_string('''
         id: fh_text   				
 
 
+<bT_GridL>:
+    l_textin: L_text
+    r_textin: R_text
+    f_textin: f_text
+    tr_textin: tr_text
+    fi_textin: fi_text 
+    fh_textin: fh_text 
+    cols: 2
+    padding: '10dp'
+    spacing: '10dp'
+
+    Button:
+        text: 'Frekvencia, f (Hz)'
+        color: 1, 1, 0, 1
+    MyTextInput:				
+        id: f_text  
+    Button:
+        text: 'Ellenállás, R (ohm)'
+        color: 1, 1, 0, 1
+    MyTextInput:	
+        id: R_text    			
+    Button:
+        text: 'Induktivitás, L (mH)'
+        color: 1, 1, 0, 1
+    MyTextInput:	
+        id: L_text			
+    Button:
+        text: 'Feszültség átv., Uki/Ube'
+        color: 0.5, 0.6, 0.7, 1
+        on_press: root.tr_button_click()
+    MyTextInputRonly:
+        id: tr_text    				
+    Button:
+        text: 'Fázistolás, ki-be (fok)'
+        color: 0.5, 0.6, 0.7, 1
+        on_press: root.tr_button_click()
+    MyTextInputRonly:	
+        id: fi_text			
+    Button:
+        text: 'Határfrekvencia, fh (Hz)'
+        color: 0.5, 0.6, 0.7, 1
+        on_press: root.tr_button_click()
+    MyTextInputRonly:
+        id: fh_text   				
+
+
+
 <BridgedTcircuit>:
     du: self.size[0]/100 if self.size[0] < self.size[1] else self.size[1]/100
     w: 2
@@ -691,6 +753,8 @@ class Ccircuit_hor(RelativeLayout):
     du = NumericProperty(2)	# draw unit
     w = NumericProperty(2)  # width   
 
+
+###########################################################################################
 
 class MyCircuit(RelativeLayout):
     xe = NumericProperty(2)	# x unit
