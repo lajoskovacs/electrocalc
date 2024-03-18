@@ -607,9 +607,66 @@ Builder.load_string('''
         id: fh_text   				
 
 
+<BridgedTcircuit>:
+    du: self.size[0]/100 if self.size[0] < self.size[1] else self.size[1]/100
+    w: 2
+    canvas:
+        Color:
+            rgb: (1, 0, 0)       
+        Line:
+            points: (2*self.du,60*self.du,18*self.du,60*self.du)
+            width: self.w
+        Line:
+            points: (42*self.du,60*self.du,58*self.du,60*self.du)
+            width: self.w  
+        Line:
+            points: (82*self.du,60*self.du,98*self.du,60*self.du)
+            width: self.w
+        Color:
+            rgb: (1, 0, 1) 
+        Line:
+            rectangle: (18*self.du,56*self.du,24*self.du,8*self.du)
+            width: self.w
+        Line:
+            rectangle: (58*self.du,56*self.du,24*self.du,8*self.du)
+            width: self.w
+        Color:
+            rgb: (1, 0, 0)       
+        Line:
+            points: (12*self.du,60*self.du,12*self.du,76*self.du,38*self.du,76*self.du)
+            width: self.w
+        Line:
+            points: (88*self.du,60*self.du,88*self.du,76*self.du,62*self.du,76*self.du)
+            width: self.w       
+        Line:
+            points: (50*self.du,60*self.du,50*self.du,50*self.du)
+            width: self.w           
+        Line:
+            points: (50*self.du,26*self.du,50*self.du,16*self.du)
+            width: self.w           
+        Line:
+            points: (2*self.du,16*self.du,98*self.du,16*self.du)
+            width: self.w
+        Color:
+            rgb: (0, 0, 1) 
+        Line:
+            rectangle: (38*self.du,72*self.du,24*self.du,8*self.du)
+            width: self.w
+        Color:
+            rgb: (0, 1, 0) 
+        Line:
+            rectangle: (46*self.du,26*self.du,8*self.du,24*self.du)
+            width: self.w
+
+
+
 ''')
 
 ###########################################################################################
+
+class BridgedTcircuit(RelativeLayout):
+    du = NumericProperty(2)	# draw unit
+    w = NumericProperty(2)  # width
 
 
 class PageLabel(TextInput):
