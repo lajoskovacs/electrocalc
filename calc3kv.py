@@ -174,12 +174,12 @@ Builder.load_string('''
             size_hint: 1, 6/10
             PageLabel:				
                 text: 'Soros RLC'	
-                size_hint: 1, 1/9
+                size_hint: 1, 1/10
             RLC_GridL:
-                size_hint: 1, 7/9
+                size_hint: 1, 7/10
             BoxLayout:
                 pos_hint: {'x': 0.2}
-                size_hint: 3/5, 1/9
+                size_hint: 5/10, 2/10
                 Rcircuit_hor
                 Lcircuit_hor
                 Ccircuit_hor  
@@ -268,9 +268,9 @@ Builder.load_string('''
                 text: 'Áthidalt T csillapító'	
                 size_hint: 1, 1/10
             BT_GridL:
-                size_hint: 1, 6/10
+                size_hint: 1, 5/10
             BridgedTcircuit:
-                size_hint: 1/2, 3/10
+                size_hint: 1/2, 4/10
 
 
 
