@@ -817,8 +817,11 @@ class MyCircuit(RelativeLayout):
       
  ###########################################################################################
 
-class BT_GridL(GridLayout):     
-    pass
+class BT_GridL(GridLayout):  
+
+    def tr_button_click(self):
+            #  XL calculation  
+        pass
 
 ###########################################################################################
 
