@@ -623,49 +623,43 @@ Builder.load_string('''
 
 
 <BT_GridL>:
-    l_textin: L_text
-    r_textin: R_text
-    f_textin: f_text
-    tr_textin: tr_text
-    fi_textin: fi_text 
-    fh_textin: fh_text 
+    rs_textin: Rs_text
+    ro_textin: Ro_text
+    rp_textin: Rp_text
+    zo_textin: Z0_text 
+    ao_textin: a0_text 
     cols: 2
     padding: '10dp'
     spacing: '10dp'
 
     Button:
-        text: 'Frekvencia, f (Hz)'
-        color: 1, 1, 0, 1
+        text: 'Ro (ohm)'
+        color: 1, 0, 1, 1
     MyTextInput:				
-        id: f_text  
+        id: Ro_text  
     Button:
-        text: 'Ellenállás, R (ohm)'
-        color: 1, 1, 0, 1
+        text: 'Rs (ohm)'
+        color: 0, 0, 1, 1
     MyTextInput:	
-        id: R_text    			
+        id: Rs_text    			
     Button:
-        text: 'Induktivitás, L (mH)'
-        color: 1, 1, 0, 1
-    MyTextInput:	
-        id: L_text			
-    Button:
-        text: 'Feszültség átv., Uki/Ube'
-        color: 0.5, 0.6, 0.7, 1
+        text: 'Rp (ohm)'
+        color: 0, 1, 0, 1
         on_press: root.tr_button_click()
-    MyTextInputRonly:
-        id: tr_text    				
+    MyTextInputRonly:	
+        id: Rp_text							
     Button:
-        text: 'Fázistolás, ki-be (fok)'
+        text: 'Hullámimpedancia, Z0 (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
     MyTextInputRonly:	
-        id: fi_text			
+        id: Z0_text			
     Button:
-        text: 'Határfrekvencia, fh (Hz)'
+        text: 'Hullámcsillapítás, a0 (dB)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
     MyTextInputRonly:
-        id: fh_text   				
+        id: a0_text   				
 
 
 
