@@ -266,7 +266,7 @@ Builder.load_string('''
             PageLabel:				
                 text: 'Áthidalt T csillapító'	
                 size_hint: 1, 1/10
-            bT_GridL:
+            BT_GridL:
                 size_hint: 1, 6/10
             BridgedTcircuit:
                 size_hint: 1/2, 3/10
@@ -622,7 +622,7 @@ Builder.load_string('''
         id: fh_text   				
 
 
-<bT_GridL>:
+<BT_GridL>:
     l_textin: L_text
     r_textin: R_text
     f_textin: f_text
@@ -814,7 +814,11 @@ class MyCircuit(RelativeLayout):
                 Line(circle=(34*xe,26*ye,2*xe,0,180),width=2)
                 Line(circle=(34*xe,22*ye,2*xe,0,180),width=2)
                 Line(points=[34*xe,20*ye,34*xe,16*ye],width=2)    # alsó kivezetés    
-        
+      
+ ###########################################################################################
+
+class BT_GridL(GridLayout):     
+    pass
 
 ###########################################################################################
 
