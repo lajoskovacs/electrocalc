@@ -18,6 +18,7 @@ from kivy.uix.widget import Widget
 from math import pi
 from math import sqrt
 from math import atan
+from math import log10
 from kivy.uix.button import  Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
@@ -639,23 +640,23 @@ Builder.load_string('''
         id: Ro_text  
     Button:
         text: 'Rs (ohm)'
-        color: 0, 0, 1, 1
+        color: 0, 1, 0, 1
     MyTextInput:	
         id: Rs_text    			
     Button:
         text: 'Rp (ohm)'
-        color: 0, 1, 0, 1
+        color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
     MyTextInputRonly:	
         id: Rp_text							
     Button:
-        text: 'Hullámimpedancia, Z0 (ohm)'
+        text: 'Hullámimpedan. Z0 (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
     MyTextInputRonly:	
         id: Z0_text			
     Button:
-        text: 'Hullámcsillapítás, a0 (dB)'
+        text: 'Hullámcsillapítás a0 (dB)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
     MyTextInputRonly:
@@ -704,12 +705,12 @@ Builder.load_string('''
             points: (2*self.du,16*self.du,98*self.du,16*self.du)
             width: self.w
         Color:
-            rgb: (0, 0, 1) 
+            rgb: (0, 1, 0) 
         Line:
             rectangle: (38*self.du,72*self.du,24*self.du,8*self.du)
             width: self.w
         Color:
-            rgb: (0, 1, 0) 
+            rgb: (1, 0, 0) 
         Line:
             rectangle: (46*self.du,26*self.du,8*self.du,24*self.du)
             width: self.w
@@ -814,8 +815,38 @@ class MyCircuit(RelativeLayout):
 class BT_GridL(GridLayout):  
 
     def tr_button_click(self):
-            #  XL calculation  
-        pass
+            #  Rp, Z0, a0 calculation  
+        ok = True
+        try:
+            R0 = float(self.ro_textin.text)   # read value of 'R0' from textinput
+            if R0 <= 0:                   # bad value !
+                ok = False
+                self.ro_textin.text = self.ro_textin.text + ' ?'  
+        except:                              # bad value !
+            ok = False
+            self.ro_textin.text = self.ro_textin.text + ' ?'  
+        try:
+            Rs = float(self.rs_textin.text)   # read  value of 'Rs' from textinput
+            if Rs <= 0:                  # bad value !
+                ok = False
+                self.rs_textin.text = self.rs_textin.text + ' ?'                  
+        except:                              # bad value !
+            ok = False
+            self.rs_textin.text = self.rs_textin.text + ' ?'  
+        if ok:                          #  all input data are ok
+            Rp = R0*R0/Rs       #  Rp  in  Ohm !!
+            Z0 = R0
+            a0 = 20*log10(Rs/R0 +1)
+
+            self.rp_textin.text = str(Rp)   # 'Rp' write
+            self.zo_textin.text = str(Z0)   # 'Z0' write
+            self.ao_textin.text = str(a0)   # 'a0' write
+
+        else:
+            self.rp_textin.text = "hiba!!"     
+            self.zo_textin.text = "hiba!!"  
+            self.ao_textin.text = "hiba!!" 
+
 
 ###########################################################################################
 
