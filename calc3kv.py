@@ -1,7 +1,7 @@
 # Electrotechnical calculations
 # XL, XC, Ze 
 #  R-L    R-C  L-C circuits
-# 2024.02.26. - 2024.03. 10.   KL
+# 2024.02.26. - 2024.03. 18.   KL
 
 # import os
 # os.environ['KIVY_NO_CONSOLELOG']='1'
