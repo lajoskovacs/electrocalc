@@ -650,13 +650,13 @@ Builder.load_string('''
     MyTextInputRonly:	
         id: Rp_text							
     Button:
-        text: 'Hullámimpedan. Z0 (ohm)'
+        text: 'Hullámimp. Z0 (ohm)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
     MyTextInputRonly:	
         id: Z0_text			
     Button:
-        text: 'Hullámcsillapítás a0 (dB)'
+        text: 'Hullámcsill. a0 (dB)'
         color: 0.5, 0.6, 0.7, 1
         on_press: root.tr_button_click()
     MyTextInputRonly:
